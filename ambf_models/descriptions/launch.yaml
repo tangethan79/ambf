@@ -27,3 +27,9 @@ multibody configs:
   - "./multi-bodies/environments/KnotEnv2/env.yaml" #20
   - "./multi-bodies/environments/KnotEnv3/env.yaml" #21
   - "./multi-bodies/environments/TexturedGround/env.yaml" #22
+  - "./multi-bodies/robots/psm1.yaml" #23
+  - "./multi-bodies/cleft/open_oral_cavity.yaml" #24
+  - "./multi-bodies/robots/psm2.yaml" #25
+  - "./multi-bodies/cleft/mouth_cup.yaml" #26
+  - "./multi-bodies/cleft/scan_aperture.yaml" #27
+  - "./multi-bodies/cleft/surface_sphere.yaml" #28

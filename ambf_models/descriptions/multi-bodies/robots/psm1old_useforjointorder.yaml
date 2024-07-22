@@ -1,0 +1,21 @@
+bodies:
+- BODY base link
+- BODY yaw link
+- BODY pitch end link
+- BODY main insertion link
+- BODY tool roll link
+- BODY tool pitch link
+- BODY tool yaw link
+- BODY tool gripper1 link
+- BODY tool gripper2 link
+joints:
+- JOINT base link-yaw link
+- JOINT yaw link-pitch back link
+- JOINT pitch end link-main insertion link
+- JOINT main insertion link-tool roll link
+- JOINT tool roll link-tool pitch link
+- JOINT tool pitch link-tool yaw link
+- JOINT tool yaw link-tool gripper1 link
+- JOINT tool yaw link-tool gripper2 link
+high resolution path: ../../../meshes/blender_afmb/cleft_models/psm1/high_res/
+low resolution path: ../../../meshes/blender_afmb/cleft_models/psm1/low_res/

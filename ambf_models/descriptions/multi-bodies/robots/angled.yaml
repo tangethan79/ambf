@@ -1,0 +1,783 @@
+bodies:
+- BODY base link
+- BODY main insertion link
+- BODY pitch end link
+- BODY yaw link
+- BODY scissor1
+- BODY scissor2
+- BODY tool pitch
+- BODY tool roll
+- BODY tool yaw
+joints:
+- JOINT base link-yaw link
+- JOINT main insertion link-tool roll
+- JOINT pitch end link-main insertion link
+- JOINT tool pitch-scissor1
+- JOINT tool pitch-scissor2
+- JOINT tool roll-tool yaw
+- JOINT tool yaw-tool pitch
+- JOINT yaw link-pitch back link
+high resolution path: ../../../meshes/blender_afmb/cleft_models/high_res/
+low resolution path: ../../../meshes/blender_afmb/cleft_models/low_res/
+ignore inter-collision: true
+gravity:
+  x: 0.0
+  y: 0.0
+  z: 0.0
+namespace: /ambf/env/
+BODY base link:
+  name: base link
+  mesh: base link.STL
+  mass: 0.0
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  collision margin: 0.001
+  scale: 1.0
+  location:
+    position:
+      x: -0.0065
+      y: 0.13598
+      z: 0.1371
+    orientation:
+      r: 1.09646
+      p: 0.02062
+      y: -3.12071
+  inertial offset:
+    position:
+      x: 0.0
+      y: -0.01577
+      z: 8.0e-05
+    orientation:
+      r: 0
+      p: 0
+      y: 0
+  passive: false
+  namespace: /ambf/env/psm1/
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  friction:
+    rolling: 0.0
+    static: 0.5
+  restitution: 0.1
+  damping:
+    angular: 0.1
+    linear: 0.04
+  visible: true
+  collision groups:
+  - 0
+  collision shape: CONE
+  collision geometry:
+    axis: X
+    height: 0.02
+    radius: 0.01
+  collision offset:
+    position:
+      x: 0.0
+      y: -0.01577
+      z: 8.0e-05
+    orientation:
+      r: 0.0
+      p: 0.0
+      y: 0.0
+  use material: true
+  color components:
+    ambient:
+      level: 1.0
+    diffuse:
+      b: 0.1317
+      g: 0.0157
+      r: 0.9373
+    specular:
+      b: 0.00785
+      g: 0.00785
+      r: 0.4687
+    transparency: 1.0
+BODY main insertion link:
+  name: main insertion link
+  mesh: main insertion link.STL
+  mass: 2.0
+  collision margin: 0.001
+  scale: 1.0
+  location:
+    position:
+      x: -0.01879
+      y: 0.52625
+      z: 0.33752
+    orientation:
+      r: 1.59762
+      p: 0.47342
+      y: -1.53924
+  inertial offset:
+    position:
+      x: -0.00801
+      y: -0.00643
+      z: 2.0e-05
+    orientation:
+      r: 0
+      p: 0
+      y: 0
+  passive: true
+  namespace: /ambf/env/psm1/
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  friction:
+    rolling: 0.0
+    static: 0.5
+  restitution: 0.0
+  damping:
+    angular: 0.1
+    linear: 0.04
+  visible: true
+  collision groups:
+  - 0
+  collision shape: BOX
+  collision geometry:
+    x: 0.12201
+    y: 0.04438
+    z: 0.08302
+  collision offset:
+    position:
+      x: -0.00801
+      y: -0.00643
+      z: 2.0e-05
+    orientation:
+      r: 0.0
+      p: 0.0
+      y: 0.0
+  use material: true
+  color components:
+    ambient:
+      level: 1.0
+    diffuse:
+      b: 0.0588
+      g: 0.5569
+      r: 1.0
+    specular:
+      b: 0.27845
+      g: 0.27845
+      r: 0.5
+    transparency: 1.0
+BODY pitch end link:
+  name: pitch end link
+  mesh: pitch end link.STL
+  mass: 1.0
+  collision margin: 0.001
+  scale: 1.0
+  location:
+    position:
+      x: -0.01016
+      y: 0.28376
+      z: 0.16465
+    orientation:
+      r: -1.52568
+      p: -1.09605
+      y: -1.59005
+  inertial offset:
+    position:
+      x: 0.01475
+      y: 0.0
+      z: 0.0
+    orientation:
+      r: 0
+      p: 0
+      y: 0
+  passive: true
+  namespace: /ambf/env/psm1/
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  friction:
+    rolling: 0.0
+    static: 0.5
+  restitution: 0.0
+  damping:
+    angular: 0.1
+    linear: 0.04
+  visible: true
+  collision groups:
+  - 1
+  collision shape: BOX
+  collision geometry:
+    x: 0.0795
+    y: 0.45
+    z: 0.07756
+  collision offset:
+    position:
+      x: 0.01475
+      y: -1.57733
+      z: 1.0e-05
+    orientation:
+      r: 0.0
+      p: 0.0
+      y: 0.0
+  use material: true
+  color components:
+    ambient:
+      level: 1.0
+    diffuse:
+      b: 0.4479
+      g: 0.1627
+      r: 0.1418
+    specular:
+      b: 0.08135
+      g: 0.08135
+      r: 0.0709
+    transparency: 1.0
+BODY yaw link:
+  name: yaw link
+  mesh: yaw link.STL
+  mass: 5.0
+  collision margin: 0.001
+  scale: 1.0
+  location:
+    position:
+      x: -0.0065
+      y: 0.13598
+      z: 0.1371
+    orientation:
+      r: -1.54762
+      p: 0.47423
+      y: -1.53933
+  inertial offset:
+    position:
+      x: -0.0
+      y: 0.0
+      z: -0.01538
+    orientation:
+      r: 0
+      p: 0
+      y: 0
+  passive: true
+  namespace: /ambf/env/psm1/
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  friction:
+    rolling: 0.0
+    static: 0.5
+  restitution: 0.1
+  damping:
+    angular: 0.1
+    linear: 0.04
+  visible: true
+  collision groups:
+  - 0
+  collision shape: CONE
+  collision geometry:
+    axis: Z
+    height: 0.02
+    radius: 0.01
+  collision offset:
+    position:
+      x: -0.0
+      y: 0.0
+      z: -0.01538
+    orientation:
+      r: 0.0
+      p: 0.0
+      y: 0.0
+  use material: true
+  color components:
+    ambient:
+      level: 1.0
+    diffuse:
+      b: 0.0
+      g: 0.8
+      r: 0.6124
+    specular:
+      b: 0.4
+      g: 0.4
+      r: 0.3062
+    transparency: 1.0
+BODY scissor1:
+  name: scissor1
+  mesh: scissor1.STL
+  mass: 0.01
+  collision margin: 0.001
+  scale: 1.0
+  location:
+    position:
+      x: -0.008
+      y: 0.16108
+      z: 0.14998
+    orientation:
+      r: 0.47435
+      p: -0.02021
+      y: 0.02008
+  inertial offset:
+    position:
+      x: 8.0e-05
+      y: -0.00097
+      z: 3.0e-05
+    orientation:
+      r: 0
+      p: 0
+      y: 0
+  passive: false
+  color: random
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  friction:
+    rolling: 0.0
+    static: 0.5
+  restitution: 0.1
+  damping:
+    angular: 0.1
+    linear: 0.04
+  visible: true
+  collision groups: []
+  collision shape: BOX
+  collision geometry:
+    x: 0.00154
+    y: 0.00829
+    z: 0.0027
+  collision offset:
+    position:
+      x: 8.0e-05
+      y: -0.00097
+      z: 3.0e-05
+    orientation:
+      r: 0.0
+      p: 0.0
+      y: 0.0
+BODY scissor2:
+  name: scissor2
+  mesh: scissor2.STL
+  mass: 0.01
+  collision margin: 0.001
+  scale: 1.0
+  location:
+    position:
+      x: -0.00724
+      y: 0.16107
+      z: 0.15005
+    orientation:
+      r: 0.47435
+      p: -0.02021
+      y: 0.02008
+  inertial offset:
+    position:
+      x: -8.0e-05
+      y: -0.00097
+      z: -3.0e-05
+    orientation:
+      r: 0
+      p: 0
+      y: 0
+  passive: false
+  color: random
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  friction:
+    rolling: 0.0
+    static: 0.5
+  restitution: 0.1
+  damping:
+    angular: 0.1
+    linear: 0.04
+  visible: true
+  collision groups: []
+  collision shape: BOX
+  collision geometry:
+    x: 0.00154
+    y: 0.00829
+    z: 0.0027
+  collision offset:
+    position:
+      x: -8.0e-05
+      y: -0.00097
+      z: -3.0e-05
+    orientation:
+      r: 0.0
+      p: 0.0
+      y: 0.0
+BODY tool pitch:
+  name: tool pitch
+  mesh: tool pitch.STL
+  mass: 0.01
+  collision margin: 0.001
+  scale: 1.0
+  location:
+    position:
+      x: -0.00763
+      y: 0.1627
+      z: 0.15085
+    orientation:
+      r: 1.52658
+      p: 1.09605
+      y: 1.55154
+  inertial offset:
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    orientation:
+      r: 0
+      p: 0
+      y: 0
+  passive: true
+  color: random
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  friction:
+    rolling: 0.0
+    static: 0.5
+  restitution: 0.1
+  damping:
+    angular: 0.1
+    linear: 0.04
+  visible: true
+  collision groups: []
+  collision shape: BOX
+  collision geometry:
+    x: 0.002
+    y: 0.002
+    z: 0.003
+  collision offset:
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    orientation:
+      r: 0.0
+      p: 0.0
+      y: 0.0
+BODY tool roll:
+  name: tool roll
+  mesh: tool roll.STL
+  mass: 0.01
+  collision margin: 0.001
+  scale: 1.0
+  location:
+    position:
+      x: -0.01367
+      y: 0.35957
+      z: 0.25196
+    orientation:
+      r: 0.47435
+      p: -0.02021
+      y: 0.02008
+  inertial offset:
+    position:
+      x: 0.0
+      y: -0.03524
+      z: -0.0
+    orientation:
+      r: 0
+      p: 0
+      y: 0
+  passive: false
+  color: random
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  friction:
+    rolling: 0.0
+    static: 0.5
+  restitution: 0.1
+  damping:
+    angular: 0.1
+    linear: 0.04
+  visible: true
+  collision groups: []
+  collision shape: CYLINDER
+  collision geometry:
+    axis: Y
+    height: 0.36574
+    radius: 0.0025
+  collision offset:
+    position:
+      x: 0.0
+      y: -0.03524
+      z: -0.0
+    orientation:
+      r: 0.0
+      p: 0.0
+      y: 0.0
+BODY tool yaw:
+  name: tool yaw
+  mesh: tool yaw.STL
+  collision mesh type: CONVEX_HULL
+  mass: 0.01
+  collision margin: 0.001
+  scale: 1.0
+  location:
+    position:
+      x: -0.00774
+      y: 0.16489
+      z: 0.15198
+    orientation:
+      r: 0.47435
+      p: -0.02021
+      y: 0.02008
+  inertial offset:
+    position:
+      x: -0.0
+      y: -2.0e-05
+      z: -0.0
+    orientation:
+      r: 0
+      p: 0
+      y: 0
+  passive: false
+  color: random
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  friction:
+    rolling: 0.0
+    static: 0.5
+  restitution: 0.1
+  damping:
+    angular: 0.1
+    linear: 0.04
+  visible: true
+  collision groups: []
+JOINT base link-yaw link:
+  name: base link-yaw link
+  parent: BODY base link
+  child: BODY yaw link
+  parent axis:
+    x: 0.0
+    y: -1.0
+    z: -0.0
+  parent pivot:
+    x: -0.0
+    y: -0.0
+    z: 0.0
+  child axis:
+    x: -0.0
+    y: 1.0
+    z: 0.0
+  child pivot:
+    x: -0.0
+    y: 0.0
+    z: -0.0
+  joint limits:
+    high: 1.599
+    low: -1.605
+  enable feedback: false
+  passive: false
+  controller output type: VELOCITY
+  type: revolute
+  max motor impulse: 50.0
+  damping: 5.0
+  offset: 1.5708
+JOINT main insertion link-tool roll:
+  name: main insertion link-tool roll
+  parent: BODY main insertion link
+  child: BODY tool roll
+  parent axis:
+    x: 1.0
+    y: -0.0008
+    z: 0.0001
+  parent pivot:
+    x: 0.0398
+    y: -0.0
+    z: -0.0
+  child axis:
+    x: 0.0009
+    y: -1.0
+    z: -0.0
+  child pivot:
+    x: -0.0
+    y: 0.14763
+    z: -0.0
+  enable feedback: false
+  passive: false
+  controller output type: VELOCITY
+  type: revolute
+  max motor impulse: 50.0
+  damping: 0.001
+  offset: -1.5743
+JOINT pitch end link-main insertion link:
+  name: pitch end link-main insertion link
+  parent: BODY pitch end link
+  child: BODY main insertion link
+  parent axis:
+    x: 0.0
+    y: 1.0
+    z: 0.0
+  parent pivot:
+    x: 0.043
+    y: -0.2948
+    z: -0.0
+  child axis:
+    x: 1.0
+    y: -0.0008
+    z: 0.0001
+  child pivot:
+    x: -0.0
+    y: -0.0
+    z: 0.0
+  joint limits:
+    high: 0.24
+    low: 0.0
+  enable feedback: false
+  passive: false
+  controller output type: VELOCITY
+  type: prismatic
+  max motor impulse: 1.0
+  damping: 100.0
+  offset: -3.13788
+JOINT tool pitch-scissor1:
+  name: tool pitch-scissor1
+  parent: BODY tool pitch
+  child: BODY scissor1
+  parent axis:
+    x: 0.0
+    y: -0.0
+    z: 1.0
+  parent pivot:
+    x: 0.0
+    y: 0.0
+    z: 0.00166
+  child axis:
+    x: 1.0
+    y: 0.0
+    z: 0.0
+  child pivot:
+    x: 0.00208
+    y: 0.00183
+    z: 3.0e-05
+  joint limits:
+    high: 1.5708
+    low: 0
+  enable feedback: false
+  passive: false
+  controller:
+    P: 10.0
+    I: 0.0
+    D: 0.2
+  controller output type: VELOCITY
+  type: revolute
+  max motor impulse: 50.0
+  damping: 0.005
+JOINT tool pitch-scissor2:
+  name: tool pitch-scissor2
+  parent: BODY tool pitch
+  child: BODY scissor2
+  parent axis:
+    x: 0.0
+    y: -0.0
+    z: 1.0
+  parent pivot:
+    x: 0.0
+    y: 0.0
+    z: 0.00166
+  child axis:
+    x: 1.0
+    y: 0.0
+    z: 0.0
+  child pivot:
+    x: 0.00132
+    y: 0.00183
+    z: -3.0e-05
+  joint limits:
+    high: 0
+    low: -1.5708
+  enable feedback: false
+  passive: false
+  controller:
+    P: 10.0
+    I: 0.0
+    D: 0.2
+  controller output type: VELOCITY
+  type: revolute
+  max motor impulse: 50.0
+  damping: 0.005
+JOINT tool roll-tool yaw:
+  name: tool roll-tool yaw
+  parent: BODY tool roll
+  child: BODY tool yaw
+  parent axis:
+    x: -0.0
+    y: 0.0
+    z: 1.0
+  parent pivot:
+    x: -0.0
+    y: -0.21686
+    z: 0.00044
+  child axis:
+    x: -0.0
+    y: 0.0
+    z: 1.0
+  child pivot:
+    x: -0.0
+    y: 0.00207
+    z: 0.00044
+  joint limits:
+    high: 1.5708
+    low: -1.5708
+  enable feedback: false
+  passive: false
+  controller output type: VELOCITY
+  type: revolute
+  max motor impulse: 50.0
+  damping: 0.05
+JOINT tool yaw-tool pitch:
+  name: tool yaw-tool pitch
+  parent: BODY tool yaw
+  child: BODY tool pitch
+  parent axis:
+    x: 1.0
+    y: 0.0
+    z: 0.0
+  parent pivot:
+    x: 0.0017
+    y: -0.00246
+    z: -0.0
+  child axis:
+    x: 0.0
+    y: -0.0
+    z: 1.0
+  child pivot:
+    x: 0.0
+    y: 0.0
+    z: 0.00166
+  joint limits:
+    high: 1.48353
+    low: -1.48353
+  enable feedback: false
+  passive: false
+  controller output type: VELOCITY
+  type: revolute
+  max motor impulse: 50.0
+  damping: 0.0
+JOINT yaw link-pitch back link:
+  name: yaw link-pitch back link
+  parent: BODY yaw link
+  child: BODY pitch end link
+  parent axis:
+    x: 0.0
+    y: 0.0
+    z: 1.0
+  parent pivot:
+    x: -0.0
+    y: 0.0
+    z: -0.0
+  child axis:
+    x: -0.0
+    y: -0.0
+    z: 1.0
+  child pivot:
+    x: 0.043
+    y: 0.1441
+    z: 0.0
+  joint limits:
+    high: 1.0472
+    low: -1.0472
+  enable feedback: false
+  passive: false
+  controller output type: VELOCITY
+  type: revolute
+  max motor impulse: 50.0
+  damping: 1.0
+  offset: -1.5708
