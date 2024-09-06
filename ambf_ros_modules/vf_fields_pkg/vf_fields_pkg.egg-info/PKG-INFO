@@ -1,0 +1,13 @@
+Metadata-Version: 2.1
+Name: vf_fields_pkg
+Version: 0.0.1
+Summary: package for generating virtual forces between two robotic arms and environment
+Author: Ethan Tang
+Author-email: ethan.tang@mail.utoronto.ca
+Requires-Dist: rospkg
+Requires-Dist: argparse
+Requires-Dist: numpy
+Requires-Dist: stl
+Requires-Dist: scipy
+Requires-Dist: pyyaml
+Requires-Dist: matplotlib

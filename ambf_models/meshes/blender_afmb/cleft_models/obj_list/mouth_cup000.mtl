@@ -1,0 +1,12 @@
+# Blender MTL File: 'mouth_cup.blend'
+# Material Count: 1
+
+newmtl Material000.001
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.121569 0.466667 0.705882
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1

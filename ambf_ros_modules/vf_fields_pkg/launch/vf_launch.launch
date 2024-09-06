@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<launch>
+  <node pkg="vf_fields_pkg" type="control_test.py" name="psm1_mtmr" output="screen" args="-arm 1 -bimanual 2"/>
+  <node pkg="vf_fields_pkg" type="control_test.py" name="psm2_mtml" output="screen" args="-arm 2 -bimanual 1"/>
+</launch>

@@ -1,0 +1,7 @@
+rospkg
+argparse
+numpy
+stl
+scipy
+pyyaml
+matplotlib

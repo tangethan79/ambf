@@ -31,3 +31,6 @@ multibody configs:
   - "./multi-bodies/cleft/open_oral_cavity.yaml" #24
   - "./multi-bodies/robots/psm2.yaml" #25
   - "./multi-bodies/cleft/mouth_cup.yaml" #26
+  - "./multi-bodies/cleft/mouth_cup_v2.yaml" #27
+  - "./multi-bodies/cleft/surface_sphere.yaml" #28
+  

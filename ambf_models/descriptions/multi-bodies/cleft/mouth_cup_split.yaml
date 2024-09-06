@@ -1,0 +1,2826 @@
+BODY mouth_cup000:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup000.obj
+  name: mouth_cup000
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup001:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup001.obj
+  name: mouth_cup001
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup002:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup002.obj
+  name: mouth_cup002
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup003:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup003.obj
+  name: mouth_cup003
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup004:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup004.obj
+  name: mouth_cup004
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup005:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup005.obj
+  name: mouth_cup005
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup006:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup006.obj
+  name: mouth_cup006
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup007:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup007.obj
+  name: mouth_cup007
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup008:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup008.obj
+  name: mouth_cup008
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup009:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup009.obj
+  name: mouth_cup009
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup010:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup010.obj
+  name: mouth_cup010
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup011:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup011.obj
+  name: mouth_cup011
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup012:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup012.obj
+  name: mouth_cup012
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup013:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup013.obj
+  name: mouth_cup013
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup014:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup014.obj
+  name: mouth_cup014
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup015:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup015.obj
+  name: mouth_cup015
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup016:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup016.obj
+  name: mouth_cup016
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup017:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup017.obj
+  name: mouth_cup017
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup018:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup018.obj
+  name: mouth_cup018
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup019:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup019.obj
+  name: mouth_cup019
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup020:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup020.obj
+  name: mouth_cup020
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup021:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup021.obj
+  name: mouth_cup021
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup022:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup022.obj
+  name: mouth_cup022
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup023:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup023.obj
+  name: mouth_cup023
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup024:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup024.obj
+  name: mouth_cup024
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup025:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup025.obj
+  name: mouth_cup025
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup026:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup026.obj
+  name: mouth_cup026
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup027:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup027.obj
+  name: mouth_cup027
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup028:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup028.obj
+  name: mouth_cup028
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup029:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup029.obj
+  name: mouth_cup029
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup030:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup030.obj
+  name: mouth_cup030
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup031:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup031.obj
+  name: mouth_cup031
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup032:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup032.obj
+  name: mouth_cup032
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup033:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup033.obj
+  name: mouth_cup033
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup034:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup034.obj
+  name: mouth_cup034
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup035:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup035.obj
+  name: mouth_cup035
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup036:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup036.obj
+  name: mouth_cup036
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup037:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup037.obj
+  name: mouth_cup037
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup038:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup038.obj
+  name: mouth_cup038
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup039:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup039.obj
+  name: mouth_cup039
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup040:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup040.obj
+  name: mouth_cup040
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup041:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup041.obj
+  name: mouth_cup041
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup042:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup042.obj
+  name: mouth_cup042
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup043:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup043.obj
+  name: mouth_cup043
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup044:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup044.obj
+  name: mouth_cup044
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup045:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup045.obj
+  name: mouth_cup045
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup046:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup046.obj
+  name: mouth_cup046
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup047:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup047.obj
+  name: mouth_cup047
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup048:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup048.obj
+  name: mouth_cup048
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup049:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup049.obj
+  name: mouth_cup049
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup050:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup050.obj
+  name: mouth_cup050
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup051:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup051.obj
+  name: mouth_cup051
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup052:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup052.obj
+  name: mouth_cup052
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup053:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup053.obj
+  name: mouth_cup053
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup054:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup054.obj
+  name: mouth_cup054
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup055:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup055.obj
+  name: mouth_cup055
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup056:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup056.obj
+  name: mouth_cup056
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup057:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup057.obj
+  name: mouth_cup057
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup058:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup058.obj
+  name: mouth_cup058
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup059:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup059.obj
+  name: mouth_cup059
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup060:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup060.obj
+  name: mouth_cup060
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup061:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup061.obj
+  name: mouth_cup061
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup062:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup062.obj
+  name: mouth_cup062
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+BODY mouth_cup063:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup063.obj
+  name: mouth_cup063
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: false
+bodies:
+- BODY mouth_cup000
+- BODY mouth_cup001
+- BODY mouth_cup002
+- BODY mouth_cup003
+- BODY mouth_cup004
+- BODY mouth_cup005
+- BODY mouth_cup006
+- BODY mouth_cup007
+- BODY mouth_cup008
+- BODY mouth_cup009
+- BODY mouth_cup010
+- BODY mouth_cup011
+- BODY mouth_cup012
+- BODY mouth_cup013
+- BODY mouth_cup014
+- BODY mouth_cup015
+- BODY mouth_cup016
+- BODY mouth_cup017
+- BODY mouth_cup018
+- BODY mouth_cup019
+- BODY mouth_cup020
+- BODY mouth_cup021
+- BODY mouth_cup022
+- BODY mouth_cup023
+- BODY mouth_cup024
+- BODY mouth_cup025
+- BODY mouth_cup026
+- BODY mouth_cup027
+- BODY mouth_cup028
+- BODY mouth_cup029
+- BODY mouth_cup030
+- BODY mouth_cup031
+- BODY mouth_cup032
+- BODY mouth_cup033
+- BODY mouth_cup034
+- BODY mouth_cup035
+- BODY mouth_cup036
+- BODY mouth_cup037
+- BODY mouth_cup038
+- BODY mouth_cup039
+- BODY mouth_cup040
+- BODY mouth_cup041
+- BODY mouth_cup042
+- BODY mouth_cup043
+- BODY mouth_cup044
+- BODY mouth_cup045
+- BODY mouth_cup046
+- BODY mouth_cup047
+- BODY mouth_cup048
+- BODY mouth_cup049
+- BODY mouth_cup050
+- BODY mouth_cup051
+- BODY mouth_cup052
+- BODY mouth_cup053
+- BODY mouth_cup054
+- BODY mouth_cup055
+- BODY mouth_cup056
+- BODY mouth_cup057
+- BODY mouth_cup058
+- BODY mouth_cup059
+- BODY mouth_cup060
+- BODY mouth_cup061
+- BODY mouth_cup062
+- BODY mouth_cup063
+gravity:
+  x: 0.0
+  y: 0.0
+  z: 0.0
+high resolution path: ../../../meshes/blender_afmb/cleft_models/obj_list/
+low resolution path: ../../../meshes/blender_afmb/cleft_models/obj_list/
+ignore inter-collision: true
+joints: []
+namespace: /ambf/env/

@@ -1,0 +1,66 @@
+bodies:
+- BODY mouth_cup_joined
+joints: []
+high resolution path: ../../../meshes/blender_afmb/cleft_models/high_res/
+low resolution path: ../../../meshes/blender_afmb/cleft_models/low_res/
+ignore inter-collision: true
+gravity:
+  x: 0.0
+  y: 0.0
+  z: 0.0
+namespace: /ambf/env/
+BODY mouth_cup_joined:
+  name: mouth_cup_joined
+  mesh: mouth_cup_joined.STL
+  collision mesh type: CONVEX_HULL
+  mass: 0.0
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  collision margin: 0.001
+  scale: 1.0
+  location:
+    position:
+      x: 0.0873
+      y: 0.00019
+      z: 0.47683
+    orientation:
+      r: 1.5708
+      p: -0.0
+      y: 0.0
+  inertial offset:
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    orientation:
+      r: 0
+      p: 0
+      y: 0
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  friction:
+    rolling: 0.0
+    static: 0.5
+  restitution: 0.1
+  damping:
+    angular: 0.1
+    linear: 0.04
+  visible: true
+  collision groups: []
+  use material: true
+  color components:
+    ambient:
+      level: 1.0
+    diffuse:
+      b: 0.29412
+      g: 0.33726
+      r: 0.54902
+    specular:
+      b: 0.16863
+      g: 0.16863
+      r: 0.27451
+    transparency: 1.0

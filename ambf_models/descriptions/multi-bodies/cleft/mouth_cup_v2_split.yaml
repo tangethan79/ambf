@@ -1,0 +1,2436 @@
+BODY geometry_0:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_0.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: mouth_cup_v2.STL
+  name: geometry_0
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_1:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_1.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_1
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_10:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_10.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_10
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_11:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_11.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_11
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_12:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_12.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_12
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_13:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_13.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_13
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_14:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_14.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_14
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_15:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_15.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_15
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_16:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_16.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_16
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_17:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_17.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_17
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_18:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_18.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_18
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_19:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_19.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_19
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_2:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_2.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_2
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_20:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_20.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_20
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_21:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_21.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_21
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_22:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_22.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_22
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_23:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_23.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_23
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_24:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_24.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_24
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_25:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_25.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_25
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_26:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_26.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_26
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_27:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_27.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_27
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_28:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_28.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_28
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_29:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_29.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_29
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_3:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_3.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_3
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_30:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_30.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_30
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_31:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_31.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_31
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_32:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_32.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_32
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_33:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_33.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_33
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_34:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_34.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_34
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_35:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_35.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_35
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_36:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_36.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_36
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_37:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_37.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_37
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_38:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_38.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_38
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_39:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_39.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_39
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_4:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_4.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_4
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_40:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_40.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_40
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_41:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_41.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_41
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_42:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_42.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_42
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_43:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_43.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_43
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_44:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_44.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_44
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_45:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_45.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_45
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_46:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_46.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_46
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_47:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_47.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_47
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_48:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_48.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_48
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_49:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_49.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_49
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_5:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_5.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_5
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_50:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_50.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_50
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_51:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_51.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_51
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_52:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_52.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_52
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_53:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_53.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_53
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_6:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_6.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_6
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_7:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_7.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_7
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_8:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_8.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_8
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+BODY geometry_9:
+  collision groups: []
+  collision margin: 0.001
+  collision mesh: geometry_9.obj
+  collision mesh type: CONVEX_HULL
+  color: random
+  damping:
+    angular: 0.1
+    linear: 0.04
+  friction:
+    rolling: 0.0
+    static: 0.5
+  inertia:
+    ix: 0.0
+    iy: 0.0
+    iz: 0.0
+  inertial offset:
+    orientation:
+      p: 0
+      r: 0
+      y: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  location:
+    orientation:
+      p: 0
+      r: 1.5708
+      y: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  mass: 0.0
+  mesh: vis_placeholder.STL
+  name: geometry_9
+  passive: false
+  publish children names: false
+  publish joint names: false
+  publish joint positions: false
+  restitution: 0.1
+  scale: 1.0
+  visible: true
+bodies:
+- BODY geometry_0
+- BODY geometry_1
+- BODY geometry_10
+- BODY geometry_11
+- BODY geometry_12
+- BODY geometry_13
+- BODY geometry_14
+- BODY geometry_15
+- BODY geometry_16
+- BODY geometry_17
+- BODY geometry_18
+- BODY geometry_19
+- BODY geometry_2
+- BODY geometry_20
+- BODY geometry_21
+- BODY geometry_22
+- BODY geometry_23
+- BODY geometry_24
+- BODY geometry_25
+- BODY geometry_26
+- BODY geometry_27
+- BODY geometry_28
+- BODY geometry_29
+- BODY geometry_3
+- BODY geometry_30
+- BODY geometry_31
+- BODY geometry_32
+- BODY geometry_33
+- BODY geometry_34
+- BODY geometry_35
+- BODY geometry_36
+- BODY geometry_37
+- BODY geometry_38
+- BODY geometry_39
+- BODY geometry_4
+- BODY geometry_40
+- BODY geometry_41
+- BODY geometry_42
+- BODY geometry_43
+- BODY geometry_44
+- BODY geometry_45
+- BODY geometry_46
+- BODY geometry_47
+- BODY geometry_48
+- BODY geometry_49
+- BODY geometry_5
+- BODY geometry_50
+- BODY geometry_51
+- BODY geometry_52
+- BODY geometry_53
+- BODY geometry_6
+- BODY geometry_7
+- BODY geometry_8
+- BODY geometry_9
+high resolution path: ../../../meshes/blender_afmb/cleft_models/convex_cup_v2/
+ignore inter-collision: true
+joints: []
+low resolution path: ../../../meshes/blender_afmb/cleft_models/convex_cup_v2/
+namespace: /ambf/env/

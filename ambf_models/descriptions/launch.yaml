@@ -33,3 +33,8 @@ multibody configs:
   - "./multi-bodies/cleft/mouth_cup.yaml" #26
   - "./multi-bodies/cleft/scan_aperture.yaml" #27
   - "./multi-bodies/cleft/surface_sphere.yaml" #28
+  - "./multi-bodies/cleft/mouth_cup_joined.yaml" #29
+  - "./multi-bodies/cleft/mouth_cup_split.yaml" #30
+  - "./multi-bodies/cleft/mouth_cup_split30.yaml" #31
+  - "./multi-bodies/cleft/mouth_cup_v2.yaml" #32
+  - "./multi-bodies/cleft/mouth_cup_v2_split.yaml" #33

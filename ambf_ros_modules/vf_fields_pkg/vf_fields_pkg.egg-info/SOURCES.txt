@@ -1,0 +1,6 @@
+setup.py
+vf_fields_pkg.egg-info/PKG-INFO
+vf_fields_pkg.egg-info/SOURCES.txt
+vf_fields_pkg.egg-info/dependency_links.txt
+vf_fields_pkg.egg-info/requires.txt
+vf_fields_pkg.egg-info/top_level.txt

@@ -4,9 +4,10 @@
 
 # ros and ambf imports
 import rospy
-import time
+import rospkg
+#import time
 from ambf_msgs.msg import RigidBodyState, RigidBodyCmd, ObjectCmd
-from ambf_client import Client
+#from ambf_client import Client
 from argparse import ArgumentParser
 from geometry_msgs.msg import Pose, Wrench
 
@@ -21,16 +22,20 @@ import yaml
 from mpl_toolkits import mplot3d
 from matplotlib import pyplot as plt
 
+rospack = rospkg.Rospk()
+VF_path = rospack.get_path('VF_fields_pkg')
+
 
 class MeshObj:
     def __init__(self, adf_num = None, body_index = None, stl_num = None):
-        yaml_list = ["mouth_cup.yaml",'scan_aperture.yaml','open_oral_cavity.yaml']
-        stl_list = ['mouth cup.STL','cleft_retracted_june_7.STL','Complete_remeshed.STL']
+        yaml_list = ['mouth_cup.yaml','scan_aperture.yaml','open_oral_cavity.yaml','mouth_cup.yaml', 'mouth_cup_v2.yaml']
+        stl_list = ['mouth cup.STL','cleft_retracted_june_7.STL','Complete_remeshed.STL','mouth cup smooth.STL', 'mouth cup v2 no holes.STL']
         if adf_num:
             self.adf_str = yaml_list[adf_num]
         else:
             # default stl string, change as needed
             self.adf_str = yaml_list[0]
+        self.adf_str = VF_path + '/config/' + self.adf_str
 
         if body_index:
             self.body_ind = body_index
@@ -41,6 +46,7 @@ class MeshObj:
             self.stl_str = stl_list[stl_num]
         else:
             self.stl_str = stl_list[adf_num]
+        self.stl_str = VF_path + '/meshes/' + self.stl_str
 
         self.get_stl()
         self.load_tree()
@@ -108,22 +114,31 @@ class MeshObj:
 
 
 class rob_state:
-    def __init__(self, tree, psmnum = 1, surface_sphere = True, force_vis = True, force_pub = False):
+    def __init__(self, tree, psmnum = 1, surface_sphere = True, force_vis = True, force_pub = False, bimanual = 0):
         self.psmnum = psmnum
-        self.nodename = 'psm'+str(self.psmnum)+'_listener'
-        self.topic_dict = {'ambf/env/psm'+ str(self.psmnum) + '/toolrolllink/State': {'data': None, 'type': RigidBodyState}}
-                           #'ambf/env/psm'+ str(self.psmnum) + '/toolpitchlink/State': {'data': None, 'type': RigidBodyState}}
+        self.nodename = 'psm_listener'
+        self.topic_dict = {'ambf/env/psm'+ str(psmnum) + '/toolrolllink/State': {'data': None, 'type': RigidBodyState}}
+
+        self.bimanual_topic = None
+        if bimanual != 0:
+            self.bimanual_topic = {'ambf/env/psm'+ str(bimanual) + '/toolrolllink/State': {'data': None, 'type': RigidBodyState}}
 
         # stl tree passed onto psm at runtime
         self.tree_obj = tree
 
         self.roll_start_dist = 1.476
-        self.roll_end_dist = 2.168
+        # self.roll_end_dist = 2.168
+        self.roll_end_dist = 1.8 # shortened to have haptics apply further back
 
         # running variables keeping track of position and distances of various bodies
         # note that each dist variable keeps track of distance and timestamp
         self.roll_position = None
         self.roll_y_axis = None
+
+        # variable to keep track of current second arm position
+        # initialized to 0 to prevent problems with accessing before assigned
+        self.bim_q_points = np.array([0,0,0], ndmin=2)
+
 
         # dist is a 3xn list of the distance, the tree index, and the timestep
         self.roll_dist = np.empty([0,3])
@@ -162,7 +177,29 @@ class rob_state:
         self.plot_roll = False
         self.plot_force_mag = True
 
-    def calc_force(self, q_distances, q_points):
+    def vec_to_force(self, v_p, dist):
+        # parallel component of distance vector
+        v_par = (np.dot(v_p, self.roll_y_axis)/np.dot(self.roll_y_axis,self.roll_y_axis)) * self.roll_y_axis
+
+        # perpendicular component of force then normalized
+        v_perp = v_p-v_par
+        v_perp = v_perp/np.linalg.norm(v_perp)
+
+        # scale force according to inverse square law, reverse how gravity works
+        if dist < self.dmax:
+            f_scale = np.sqrt((self.dmax - dist)/self.dmax)
+
+            # scale force according to velocity vector alignment with offset
+            v_scale = (np.dot(self.roll_vel, v_perp)*0.5)+1
+        else:
+            f_scale = 0
+            v_scale = 0
+
+
+        f = v_perp*v_scale*f_scale
+        return f
+
+    def calc_force(self, q_distances, q_points, bim_vec = None):
         # this initializes at 0 for both force and torque
         wrench_vec = Wrench()
 
@@ -173,27 +210,19 @@ class rob_state:
 
             v_p = np.transpose(q_points[i]-mesh_coord)
 
-            # parallel component of distance vector
-            v_par = (np.dot(v_p, self.roll_y_axis)/np.dot(self.roll_y_axis,self.roll_y_axis)) * self.roll_y_axis
-
-            # perpendicular component of force then normalized
-            v_perp = v_p-v_par
-            v_perp = v_perp/np.linalg.norm(v_perp)
-
-            # scale force according to inverse square law, reverse how gravity works
-            if q_distances[0][i] < self.dmax:
-                f_scale = np.sqrt((self.dmax- q_distances[0][i])/self.dmax)*0.5
-
-                # scale force according to velocity vector alignment with offset
-                v_scale = (np.dot(self.roll_vel, v_perp)*0.5)+1
-            else:
-                f_scale = 0
-                v_scale = 0
-
-
-            f = v_perp*v_scale*f_scale
+            f = self.vec_to_force(v_p, q_distances[0][i])
 
             # add effects of points together in wrench
+
+
+            wrench_vec.force.x += f[0]
+            wrench_vec.force.y += f[1]
+            wrench_vec.force.z += f[2]
+
+        # if bimanual forces are enabled, we know the last entry corresponds to the bimanual effects
+        # we multiply this by 3 to scale it up to a similar degree as the cup interactions
+        if self.bimanual_topic is not None:
+            f = self.vec_to_force(bim_vec, np.linalg.norm(bim_vec))*3
             wrench_vec.force.x += f[0]
             wrench_vec.force.y += f[1]
             wrench_vec.force.z += f[2]
@@ -213,8 +242,27 @@ class rob_state:
             mag = lin_norm
 
         return wrench_vec, mag
+    
+    def callback_bim(self, data, args):
+        x = data.pose.position.x
+        y = data.pose.position.y
+        z = data.pose.position.z
+        bim_roll_position = np.array([x,y,z])
+        rollframe = R.from_quat([data.pose.orientation.x, data.pose.orientation.y, data.pose.orientation.z, data.pose.orientation.w])
+        rollframe = rollframe.as_matrix()
+        bim_roll_y_axis = rollframe[:,1]
+
+        # find start and end point based on known length of roll body and orientation of y axis
+        start_point = bim_roll_position + bim_roll_y_axis* self.roll_start_dist
+        end_point = bim_roll_position - bim_roll_y_axis* self.roll_end_dist
+        # print(start_point,end_point,self.roll_position, self.roll_y_axis)
+
+        # generate list of query points and transpose to fit query requirements
+        self.bim_q_points = np.linspace(start_point, end_point, num=10)
+
 
     def callback(self, data, args):
+
         if data.name.data == 'toolrolllink':
             x = data.pose.position.x
             y = data.pose.position.y
@@ -235,7 +283,7 @@ class rob_state:
             # print(start_point,end_point,self.roll_position, self.roll_y_axis)
 
             # generate list of query points and transpose to fit query requirements
-            q_points = np.linspace(start_point, end_point, num=5)
+            q_points = np.linspace(start_point, end_point, num=20)
             q_distances = self.tree_obj.query(q_points)
             # print(q_distances)
 
@@ -245,9 +293,24 @@ class rob_state:
             self.roll_dist = np.vstack((self.roll_dist,closest))
             # print(closest[0])
 
-            if self.force_vis == True:
-                wrench, mag = self.calc_force(q_distances, q_points)
+            if self.bimanual_topic is not None:
+                # find the distances between each arm point and select the shortest distance
+                bim_dist_mat = spatial.distance.cdist(q_points, self.bim_q_points, metric = 'euclidean')
+                small_index = np.unravel_index(np.argmin(bim_dist_mat, axis = None), bim_dist_mat.shape)
 
+                # find the closest pair of points in the two arrays
+                bim_closest = self.bim_q_points[small_index[1], :]
+                teleop_closest = q_points[small_index[0], :]
+
+                # add this vector to force calculations
+                bim_vec = teleop_closest-bim_closest
+            else:
+                bim_vec = None
+
+
+            wrench, mag = self.calc_force(q_distances, q_points, bim_vec = bim_vec) # remember to update MTM publisher with wrench info!
+
+            if self.force_vis == True:
                 mag_stamp = np.array([mag, data.sim_time])
                 self.fmag_list = np.vstack((self.fmag_list, mag_stamp))
 
@@ -302,14 +365,21 @@ class rob_state:
 
 
     def listener(self):
-        node_name = 'psm' + str(self.psmnum) + 'listener'
-        rospy.init_node(node_name, anonymous = True)
+        rospy.init_node(self.nodename, anonymous = True)
+
+        # generate subscriber topic for controlled arm
         for key in self.topic_dict:
             rospy.Subscriber(name = key, data_class=self.topic_dict[key]["type"], callback=self.callback, callback_args=key)
         rospy.on_shutdown(self.cleanup)
 
+        # update this to work with multiple spheres
         if self.surface_sphere == True:
-            self.sphere_cmd = rospy.Publisher(name='/ambf/env/Icosphere/Command', data_class=RigidBodyCmd, tcp_nodelay=True, queue_size=10)
+            self.sphere_cmd = rospy.Publisher(name='/ambf/env/Icosphere' + str(self.psmnum) +'/Command', data_class=RigidBodyCmd, tcp_nodelay=True, queue_size=10)
+
+        # generate subscriber for possible other arms
+        if self.bimanual_topic is not None:
+            for key in self.bimanual_topic:
+                rospy.Subscriber(name = key, data_class=self.bimanual_topic[key]["type"], callback=self.callback_bim, callback_args=key)
 
         #if self.force_vis = True:
 
@@ -320,11 +390,22 @@ class rob_state:
 
 
 if __name__ == '__main__':
-    tree = MeshObj(adf_num = 0)
+    parser = ArgumentParser()
+    parser.add_argument('-arm', type=int)
+    parser.add_argument('-bimanual', type=int)
+    args = parser.parse_args()
+
+    if args.arm is None:
+        args.arm = 1
+
+    if args.bimanual is None or args.bimanual == args.arm: # prevent from querying itself for force feedback
+        args.bimanual = 0
+
+    tree = MeshObj(adf_num = 4)
     print(tree.tree.data[0])
 
     # initialize the listener subscriber with the known tree mesh info
-    listen = rob_state(tree.tree)
+    psm_listener = rob_state(tree.tree, psmnum = args.arm, bimanual = args.bimanual)
 
-    # start the main subscriber loop
-    listen.listener()
+    # start the main subscriber loop for each arm
+    psm_listener.listener()
