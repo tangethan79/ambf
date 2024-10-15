@@ -244,6 +244,7 @@ BODY pitch end link:
         p: 0.0
         y: 0.0
   use material: true
+  collision groups: [1]
   color components:
     ambient:
       level: 1.0
@@ -295,6 +296,7 @@ BODY main insertion link:
   collision groups:
   - 0
   collision shape: BOX
+  collision groups: [1]
   collision geometry:
     x: 0.9801
     y: 0.3838
@@ -359,7 +361,7 @@ BODY tool roll link:
     angular: 0.1
     linear: 0.04
   visible: true
-  collision groups: []
+  collision groups: [1]
 BODY tool pitch link:
   name: tool pitch link
   mesh: tool pitch link.STL
@@ -398,7 +400,7 @@ BODY tool pitch link:
     angular: 0.1
     linear: 0.04
   visible: true
-  collision groups: []
+  collision groups: [1]
 BODY tool yaw link:
   name: tool yaw link
   mesh: tool yaw link.STL
@@ -436,8 +438,7 @@ BODY tool yaw link:
     angular: 0.1
     linear: 0.04
   visible: true
-  collision groups:
-  - 4
+  collision groups: [1]
   collision shape: CYLINDER
   collision geometry:
     axis: Z
@@ -490,7 +491,7 @@ BODY tool gripper1 link:
     angular: 0.1
     linear: 0.04
   visible: true
-  collision groups: []
+  collision groups: [1]
 BODY tool gripper2 link:
   name: tool gripper2 link
   mesh: tool gripper2 link.STL
@@ -529,7 +530,7 @@ BODY tool gripper2 link:
     angular: 0.1
     linear: 0.04
   visible: true
-  collision groups: []
+  collision groups: [1]
 JOINT base link-yaw link:
   name: base link-yaw link
   parent: BODY base link
