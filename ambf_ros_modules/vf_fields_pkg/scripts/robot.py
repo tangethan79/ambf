@@ -57,8 +57,6 @@ class rob_state:
 
         self.grip2_position = None
         self.grip2_dist = np.empty([0,3])
-        # all three dist lists will be "zippered" together at the end with interpolation 
-        # so each distance can be properly compared and the minimum selected
 
         self.fmag_list = np.empty([0,2])
 
