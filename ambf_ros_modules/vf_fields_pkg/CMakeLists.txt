@@ -13,6 +13,7 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   message_generation
   std_msgs
+  crtk
 )
 
 ## System dependencies are found with CMake's conventions
@@ -109,7 +110,7 @@ catkin_python_setup()
 catkin_package(
 #  INCLUDE_DIRS include
   LIBRARIES vf_fields_pkg
-  CATKIN_DEPENDS message_runtime ambf_msgs geometry_msgs rospy
+  CATKIN_DEPENDS message_runtime ambf_msgs geometry_msgs rospy crtk
 #  DEPENDS system_lib
 )
 

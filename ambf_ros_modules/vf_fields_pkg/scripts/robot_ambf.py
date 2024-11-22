@@ -1,3 +1,6 @@
+# this is the version of the robot control script that runs entirely in ambf with teleoperation
+# no physical sensors and no interaction with the PSM on the dvrk
+
 # ros and ambf imports
 import rospy
 import rospkg
@@ -221,7 +224,8 @@ class rob_state:
                 h = Header()
                 h.stamp = rospy.Time.now()
                 w_stamped = WrenchStamped()
-                w_stamped.header = w_stamped.wrench = wrench
+                w_stamped.header = h
+                w_stamped.wrench = wrench
                 self.force_cmd.publish(w_stamped)
 
             if self.force_vis == True:

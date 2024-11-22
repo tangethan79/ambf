@@ -29,7 +29,7 @@ VF_path = rospack.get_path('vf_fields_pkg')
 
 # constructed classes
 from mesh import MeshObj
-from robot import rob_state
+from ambf_ros_modules.vf_fields_pkg.scripts.robot_ambf import rob_state
 
 
 if __name__ == '__main__':

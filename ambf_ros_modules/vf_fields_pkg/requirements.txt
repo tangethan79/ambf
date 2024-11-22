@@ -1,0 +1,12 @@
+crtk==0.0.25
+matplotlib==3.1.2
+numpy==1.24.4
+numpy==1.17.4
+numpy_stl==3.1.2
+pyKDL==1.4.0
+PyYAML==6.0.2
+rospkg==1.5.1
+rospkg_modules==1.5.1
+rospy==1.16.0
+scipy==1.14.1
+setuptools==45.2.0

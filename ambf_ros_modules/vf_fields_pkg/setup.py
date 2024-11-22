@@ -14,7 +14,9 @@ setup(
         'numpy-stl',
         'scipy',
         'pyyaml',
-        'matplotlib'
+        'matplotlib',
+        'rospy',
+        'crtk'
     ],
     setup_requires=[
         'setuptools'
