@@ -35,7 +35,7 @@ from matplotlib import pyplot as plt
 rospack = rospkg.RosPack()
 VF_path = rospack.get_path('vf_fields_pkg')
 
-class rob_state:
+class rob_state_ndi:
     def __init__(self, tree, psmnum = 1, surface_sphere = True, force_vis = True, force_pub = False, bimanual = 0):
         self.psmnum = psmnum
 
@@ -54,7 +54,6 @@ class rob_state:
         self.bimanual_topic = None
 
         self.roll_frame = Pose()
-        self.roll_pub = rospy.Publisher('psm'+str(self.psmnum)+'_rollpose', Pose, queue_size=10)
         self.roll_vel_queue = deque(maxlen=10) # max number of entries for sliding average filter
         self.roll_vel = None # the current value of the linear velocity
         self.prev_pose = None
@@ -226,19 +225,15 @@ class rob_state:
         # create the new roll frame
         # need to publish for other psm if bimanual
         if self.bimanual_topic is not None:
-            p = Point()
-            p.x = x
-            p.y = y
-            p.z = z
+            self.roll_frame.position.x = x
+            self.roll_frame.position.y = y
+            self.roll_frame.position.z = z
 
-            q = Quaternion()
-            q.x = xw
-            q.y = yw
-            q.z = zw
-            q.w = ww
+            self.roll_frame.orientation.x = xw
+            self.roll_frame.orientation.y = yw
+            self.roll_frame.orientation.z = zw
+            self.roll_frame.orientation.w = ww
 
-            self.roll_frame.position = p
-            self.roll_frame.orientation = q
             self.roll_pub.publish(self.roll_frame)
 
         curr_time = data.header.stamp.to_sec()
@@ -392,6 +387,7 @@ class rob_state:
         if self.bimanual_topic is not None:
             for key in self.bimanual_topic:
                 rospy.Subscriber(name = key, data_class=self.bimanual_topic[key]["type"], callback=self.callback_bim, callback_args=key)
+            self.roll_pub = rospy.Publisher('psm'+str(self.psmnum)+'_rollpose', Pose, queue_size=10)
 
         #if self.force_vis = True:
 
