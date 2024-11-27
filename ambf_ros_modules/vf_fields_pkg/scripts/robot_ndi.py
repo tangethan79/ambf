@@ -108,6 +108,9 @@ class rob_state_ndi:
         else:
             self.sphere_pub = None
         
+        self.cylinder_pub = RigidBodyCmd()
+        self.cylinder_pub.cartesian_cmd_type = 1
+
         # flag for force visualization arrow
         self.force_vis = force_vis
 
@@ -221,21 +224,6 @@ class rob_state_ndi:
         zw = data.pose.orientation.z
         ww = data.pose.orientation.w
 
-
-        # create the new roll frame
-        # need to publish for other psm if bimanual
-        if self.bimanual_topic is not None:
-            self.roll_frame.position.x = x
-            self.roll_frame.position.y = y
-            self.roll_frame.position.z = z
-
-            self.roll_frame.orientation.x = xw
-            self.roll_frame.orientation.y = yw
-            self.roll_frame.orientation.z = zw
-            self.roll_frame.orientation.w = ww
-
-            self.roll_pub.publish(self.roll_frame)
-
         curr_time = data.header.stamp.to_sec()
 
         if self.prev_pose is not None and self.prev_time is not None:
@@ -284,7 +272,21 @@ class rob_state_ndi:
         self.roll_dist = np.vstack((self.roll_dist,closest))
         # print(closest[0])
 
+        # create the new roll frame
+        # need to publish for other psm if bimanual
         if self.bimanual_topic is not None:
+            self.roll_frame.position.x = x
+            self.roll_frame.position.y = y
+            self.roll_frame.position.z = z
+
+            self.roll_frame.orientation.x = xw
+            self.roll_frame.orientation.y = yw
+            self.roll_frame.orientation.z = zw
+            self.roll_frame.orientation.w = ww
+
+            self.roll_pub.publish(self.roll_frame)
+
+
             # find the distances between each arm point and select the shortest distance
             bim_dist_mat = spatial.distance.cdist(q_points, self.bim_q_points, metric = 'euclidean')
             small_index = np.unravel_index(np.argmin(bim_dist_mat, axis = None), bim_dist_mat.shape)
@@ -298,7 +300,8 @@ class rob_state_ndi:
         else:
             bim_vec = None
 
-
+        self.cylinder_pub.pose = self.roll_frame
+        self.cylinder_cmd.publish(self.cylinder_cmd)
         wrench, mag = self.calc_force(q_distances, q_points, bim_vec = bim_vec) # remember to update MTM publisher with wrench info!
 
         if self.force_pub == True:
@@ -390,6 +393,9 @@ class rob_state_ndi:
             self.roll_pub = rospy.Publisher('psm'+str(self.psmnum)+'_rollpose', Pose, queue_size=10)
 
         #if self.force_vis = True:
+
+        self.cylinder_cmd = rospy.Publisher(name='/ambf/env/Cylinder/Command', data_class=RigidBodyCmd, tcp_nodelay=True, queue_size=10)
+
 
         # VF logic, only do this at 5 Hz to not slow down sim
         rate = rospy.Rate(5)

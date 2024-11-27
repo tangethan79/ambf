@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <launch>
+  <node pkg="ambf" type="ambf_simulator" name="ambf_node" output="screen" args="-l 28,34,35"/>
   <node pkg="vf_fields_pkg" type="control_test.py" name="psm1_mtmr" output="screen" args="--arm 1 --bimanual 2 --ndi"/>
   <node pkg="vf_fields_pkg" type="control_test.py" name="psm2_mtml" output="screen" args="--arm 2 --bimanual 1 --ndi"/>
 </launch>

@@ -39,3 +39,4 @@ multibody configs:
   - "./multi-bodies/cleft/mouth_cup_v2.yaml" #32
   - "./multi-bodies/cleft/mouth_cup_v2_split.yaml" #33
   - "./multi-bodies/cleft/suture_box.yaml" #34
+  - "./multi-bodies/cleft/PSM_standin.yaml" #35
