@@ -44,8 +44,55 @@ class MeshObj:
             self.stl_str = mouth_attrib[body_string]['mesh']
         self.stl_str = VF_path + '/meshes/' + self.stl_str
 
-        self.get_stl()
-        self.load_tree()
+        if sdf == False:
+            self.get_stl()
+            self.load_tree()
+        else:
+            self.get_stl_trimesh()
+
+
+    def get_stl_trimesh(self):
+        mouth = trimesh.load(self.stl_str)
+        self.get_pose_homog()
+        mouth.apply_transform(self.homog)
+        self.SDF = SDF(mouth.vertices, mouth.faces)
+
+
+    def query_SDF_grad(self, points):
+        query = self.SDF(points)
+        #print(query)
+        negative = np.where(query <=0)[0]
+        if query.size > 0:
+            closest_index_negative = np.argmax(query[negative])
+            closest_index = negative[closest_index_negative]
+            #print(points[closest_index,:])
+            grad = self.compute_sdf_gradient(points[closest_index,:])
+            #print(-1*grad)
+            return -1*grad, negative[closest_index_negative]
+        else:
+            return False, False
+
+
+    def compute_sdf_gradient(self, point, epsilon=1e-5):
+        """
+        Computes the gradient of the SDF at a given point using finite differences.
+
+        Args:
+            sdf (SDF): The SDF object.
+            point (np.ndarray): The 3D point at which to compute the gradient.
+            epsilon (float): A small value for finite differences.
+
+        Returns:
+            np.ndarray: The gradient vector at the point.
+        """
+        gradient = np.zeros(3)
+        for i in range(3):
+            offset = np.zeros(3)
+            offset[i] = epsilon
+            sdf_plus = self.SDF(point + offset)
+            sdf_minus = self.SDF(point - offset)
+            gradient[i] = (sdf_plus[0] - sdf_minus[0]) / (2 * epsilon)
+        return gradient
 
 
     def load_tree(self):

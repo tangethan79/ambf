@@ -25,6 +25,8 @@ if __name__ == '__main__':
     parser.add_argument('--bimanual', type=int)
     parser.add_argument('--ndi', action='store_true')
     parser.set_defaults(ndi = False)
+    parser.add_argument('--sdf', action='store_true')
+    parser.set_defaults(sdf = False)
     args, _ = parser.parse_known_args()
 
     if args.arm is None:
@@ -33,14 +35,22 @@ if __name__ == '__main__':
     if args.bimanual is None or args.bimanual == args.arm: # prevent from querying itself for force feedback
         args.bimanual = 0
 
-    tree = MeshObj(adf_num = 5)
-    print(tree.tree.data[0])
+    if args.adf is None:
+        args.adf = 5
 
-    if args.ndi is True:
-        psm_listener = rob_state_ndi(tree.tree, psmnum = args.arm, bimanual = args.bimanual)
+    if args.sdf is False or args.ndi is False:
+        tree = MeshObj(adf_num = args.adf)
+        print(tree.tree.data[0])
+        
+        if args.ndi is True:
+            psm_listener = rob_state_ndi(tree.tree, psmnum = args.arm, bimanual = args.bimanual)
+        else:
+            # initialize the listener subscriber with the known tree mesh info
+            psm_listener = rob_state(tree.tree, psmnum = args.arm, bimanual = args.bimanual)
     else:
-        # initialize the listener subscriber with the known tree mesh info
-        psm_listener = rob_state(tree.tree, psmnum = args.arm, bimanual = args.bimanual)
+        sdf = MeshObj(adf_num = args.adf, sdf = True)
+        psm_listener = rob_state_ndi(sdf, psmnum = args.arm, bimanual = args.bimanual, sdf = True)
+
 
     # start the main subscriber loop for each arm
     psm_listener.listener()

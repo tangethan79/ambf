@@ -34,7 +34,7 @@ rospack = rospkg.RosPack()
 VF_path = rospack.get_path('vf_fields_pkg')
 
 class rob_state_ndi:
-    def __init__(self, tree, psmnum = 2, surface_sphere = True, force_vis = False, force_pub = False, bimanual = 0):
+    def __init__(self, tree, psmnum = 2, surface_sphere = True, force_vis = False, force_pub = False, bimanual = 0, sdf = False):
         self.cleft_p = np.array([-0.93998,0.003,1.05936]).reshape(3,1)
         cleft_R = R.from_euler('xyz', [1.85791,-0.2802,2.27472])
         self.cleft_R = cleft_R.as_matrix()
@@ -64,6 +64,7 @@ class rob_state_ndi:
         self.roll_vel = None # the current value of the linear velocity
         self.prev_pose = None
         self.prev_time = None
+        self.sdf_flag = sdf
 
         if bimanual != 0:
 
@@ -71,8 +72,11 @@ class rob_state_ndi:
             bimanual = str(bimanual)
             self.bimanual_topic = {'psm'+bimanual+'_rollpose': {'data': None, 'type': Pose}}
 
-        # stl tree passed onto psm at runtime
-        self.tree_obj = tree
+        if sdf is False:
+            # stl tree passed onto psm at runtime
+            self.tree_obj = tree
+        else:
+            self.sdf = tree
 
         self.roll_start_dist = 1.476
         # self.roll_end_dist = 2.168
@@ -208,7 +212,7 @@ class rob_state_ndi:
 
         # generate list of query points and transpose to fit query requirementsdata.pose.orientation.xs in velocity
 
-        self.bim_q_points = np.linspace(start_point, end_point, num=10)
+        self.bim_q_points = np.linspace(start_point, end_point, num=20)
 
     def callback(self, data, args):
 
@@ -254,6 +258,7 @@ class rob_state_ndi:
 
         #print('ndi tool found', data.pose.position.x)
 
+        # the stuff below doesn't work \/ \/ \/ \/!!! FIX IT DUMBASS!!!
         curr_time = data.header.stamp.to_sec()
         curr_pose = PSM_p
         if self.prev_pose is not None and self.prev_time is not None:
@@ -302,14 +307,20 @@ class rob_state_ndi:
         # print(start_point,end_point,self.roll_position, self.roll_y_axis)
 
         # generate list of query points and transpose to fit query requirements
-        q_points = np.linspace(start_point, end_point, num=20)
-        q_distances = self.tree_obj.query(q_points)
-        # print(q_distances)
+        num_points = 20
+        q_points = np.linspace(start_point, end_point, num=num_points)
 
-        # store closest points in appropriate array
-        query_closest = np.argmin(q_distances[0])
-        closest = np.array([q_distances[0][query_closest], q_distances[1][query_closest], data.header.stamp.to_sec()])
-        self.roll_dist = np.vstack((self.roll_dist,closest))
+
+        if self.sdf_flag is False:
+            q_distances = self.tree_obj.query(q_points)
+            # print(q_distances)
+
+            # store closest points in appropriate array
+            query_closest = np.argmin(q_distances[0])
+            closest = np.array([q_distances[0][query_closest], q_distances[1][query_closest], data.header.stamp.to_sec()])
+            self.roll_dist = np.vstack((self.roll_dist,closest))
+        else:
+            grad_vec, dist = self.sdf.query_SDF_grad(q_points)
         # print(closest[0])
 
         # create the new roll frame
@@ -335,7 +346,10 @@ class rob_state_ndi:
         self.cylinder_pub.pose = self.roll_frame
         #print(self.cylinder_pub.pose)
         self.cylinder_cmd.publish(self.cylinder_pub)
-        wrench, mag = self.calc_force(q_distances, q_points, bim_vec = bim_vec) # remember to update MTM publisher with wrench info!
+        if self.sdf_flag is False:
+            wrench, mag = self.calc_force(q_distances, q_points, bim_vec = bim_vec) # remember to update MTM publisher with wrench info!
+        else:
+            wrench, mag = self.calc_force_sdf(grad_vec, dist, bim_vec = bim_vec)
 
         if self.force_pub == True:
             # add header to wrench for publishing protocol
@@ -359,6 +373,40 @@ class rob_state_ndi:
 
             self.sphere_cmd.publish(self.sphere_pub)
                 
+
+    def calc_force_sdf(self, grad, dist, bim_vec = None):
+        # this initializes at 0 for both force and torque
+        wrench_vec = Wrench()
+
+        f = self.vec_to_force(grad, dist)
+
+        # add effects of points together in wrench
+        wrench_vec.force.x += f[0]
+        wrench_vec.force.y += f[1]
+        wrench_vec.force.z += f[2]
+
+        if self.bimanual_topic is not None:
+            f = self.vec_to_force(bim_vec, np.linalg.norm(bim_vec))*3
+            wrench_vec.force.x += f[0]
+            wrench_vec.force.y += f[1]
+            wrench_vec.force.z += f[2]
+
+        linear_force = [wrench_vec.force.x, wrench_vec.force.y, wrench_vec.force.z]
+        lin_norm = np.linalg.norm([wrench_vec.force.x, wrench_vec.force.y, wrench_vec.force.z])
+
+        # check if force has reached saturation cutoff
+        if lin_norm > self.force_sat:
+            linear_force = self.force_sat*(linear_force/lin_norm)
+            wrench_vec.force.x = linear_force[0]
+            wrench_vec.force.y = linear_force[1]
+            wrench_vec.force.z = linear_force[2]
+
+            mag = self.force_sat
+        else:
+            mag = lin_norm
+
+        return wrench_vec, mag
+
 
 
     def cleanup(self):
