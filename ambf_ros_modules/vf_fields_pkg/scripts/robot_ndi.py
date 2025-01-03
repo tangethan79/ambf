@@ -6,10 +6,8 @@
 # with this tool, we can get the PSM frame wrt the cleft and leave the cleft completely stationary in the scene at an origin determined in blender
 # This also preserves the relationship if the NDI camera gets moved, both origins are stationary if they don't move relative to each other
 import dvrk
-import crtk
 # these two packages control reading and writing dvrk joint vals
 
-import pyKDL
 from collections import deque
 
 # ros and ambf imports
@@ -36,18 +34,26 @@ rospack = rospkg.RosPack()
 VF_path = rospack.get_path('vf_fields_pkg')
 
 class rob_state_ndi:
-    def __init__(self, tree, psmnum = 1, surface_sphere = True, force_vis = True, force_pub = False, bimanual = 0):
+    def __init__(self, tree, psmnum = 2, surface_sphere = True, force_vis = False, force_pub = False, bimanual = 0):
+        self.cleft_p = np.array([-0.93998,0.003,1.05936]).reshape(3,1)
+        cleft_R = R.from_euler('xyz', [1.85791,-0.2802,2.27472])
+        self.cleft_R = cleft_R.as_matrix()
+
+        pad = np.array([0,0,0,1])
+        self.cleft_pose = np.hstack((self.cleft_R,self.cleft_p))
+        self.cleft_pose = np.vstack((self.cleft_pose, pad))
+
         self.psmnum = psmnum
 
         # self.toolname should be the string used in the NDI ROS topic, update this later to correct value
 
-        self.toolname = str(psmnum)
+        self.toolname = "PSM" + str(self.psmnum)
         self.nodename = 'psm_ndi_listener'
 
         # this has been updated to take the pose of the NDI tracker which we assume is at the tip of the robot with at least one axis lining up with the roll axis
         # we also assume that this pose is wrt the cleft pose
         # in callback, we need to deal with scaling and add static pose offset imposed by blender cleft model (x = -9.3998 cm, y = 0.0301 cm, z = 10.594 cm)
-        self.topic_dict = {'/NDI/' + self.psmnum + '/measured_cp': {'data': None, 'type': PoseStamped}}
+        self.topic_dict = {'/NDI/' + self.toolname + '/measured_cp': {'data': None, 'type': PoseStamped}}
 
         # need y axis to align with roll joint
 
@@ -200,9 +206,9 @@ class rob_state_ndi:
         end_point = bim_roll_position - bim_roll_y_axis* self.roll_end_dist
         # print(start_point,end_point,self.roll_position, self.roll_y_axis)
 
-        # generate list of query points and transpose to fit query requirements
-        self.bim_q_points = np.linspace(start_point, end_point, num=10)
+        # generate list of query points and transpose to fit query requirementsdata.pose.orientation.xs in velocity
 
+        self.bim_q_points = np.linspace(start_point, end_point, num=10)
 
     def callback(self, data, args):
 
@@ -213,40 +219,74 @@ class rob_state_ndi:
         # ambf units are in decimetres so we multiply the metre value by 10
 
         # the extra fixed pose is the pose of the reference geometry in ambf, i.e. the cleft model
-        x = data.pose.position.x*10 - 9.3998
-        y = data.pose.position.y*10 + 0.03001
-        z = data.pose.position.z*10 + 10.594
-        curr_pose = np.array([x,y,z])
+
+        PSM_p = np.array([data.pose.position.x*10,data.pose.position.y*10,data.pose.position.z*10]).reshape(3,1)
+        PSM_R = R.from_quat([data.pose.orientation.x,data.pose.orientation.y,data.pose.orientation.z,data.pose.orientation.w])
+        PSM_pose = np.hstack((PSM_R.as_matrix(),PSM_p))
+        PSM_pose = np.vstack((PSM_pose, np.array([0,0,0,1])))
+        #print(PSM_pose,self.cleft_pose)
+        PSM_pose = np.matmul(self.cleft_pose,PSM_pose,)
+        #print(PSM_pose)
+        x = PSM_pose[0,3]
+        y = PSM_pose[1,3]
+        z = PSM_pose[2,3]
+
+        Rotation = PSM_pose[0:3,0:3]
+        r = R.from_matrix(Rotation)
+        r = r.as_quat()
+        # quaternion info from ros
+        xw = r[0]
+        yw = r[1]
+        zw = r[2]
+        ww = r[3]
+
+        # the extra fixed pose is the pose of the reference geometry in ambf, i.e. the cleft model
+        # x = data.pose.position.x
+        # y = data.pose.position.y
+        # z = data.pose.position.z
 
         # quaternion info from ros
-        xw = data.pose.orientation.x
-        yw = data.pose.orientation.y
-        zw = data.pose.orientation.z
-        ww = data.pose.orientation.w
+        # xw = data.pose.orientation.x
+        # yw = data.pose.orientation.y
+        # zw = data.pose.orientation.z
+        # ww = data.pose.orientation.w
+
+
+        #print('ndi tool found', data.pose.position.x)
 
         curr_time = data.header.stamp.to_sec()
-
+        curr_pose = PSM_p
         if self.prev_pose is not None and self.prev_time is not None:
             del_pose = curr_pose - self.prev_pose
             del_time = self.prev_time - curr_time
             if del_time > 0:
                 vel = del_pose/del_time
-                self.roll_vel_queue.append(vel)
-                self.roll_vel = np.mean(self.velocity_buffer, axis=0)
+                self.roll_vel_queue.append(vel.reshape(3,1))
+                self.roll_vel = np.mean(np.hstack(self.roll_vel_queue), axis=1)
+                #print(self.roll_vel)
                 self.roll_vel.reshape(3,1)
             else:
                 vel = np.array([0, 0, 0])
-                self.roll_vel_queue.append(vel)
+                self.roll_vel_queue.append(vel.reshape(3,1))
                 self.roll_vel = vel
                 self.roll_vel.reshape(3,1)
         else:
             vel = np.array([0, 0, 0])
-            self.roll_vel_queue.append(vel)
+            self.roll_vel_queue.append(vel.reshape(3,1))
             self.roll_vel = vel
             self.roll_vel.reshape(3,1)
 
         # if velocity calculation could be wrong for any reason, stop and set it to zero
         # this is additionally added to the queue so that the starting velocities don't jump
+
+        self.roll_frame.position.x = x
+        self.roll_frame.position.y = y
+        self.roll_frame.position.z = z
+
+        self.roll_frame.orientation.x = xw
+        self.roll_frame.orientation.y = yw
+        self.roll_frame.orientation.z = zw
+        self.roll_frame.orientation.w = ww
 
         self.prev_pose = curr_pose
         self.prev_time = curr_time
@@ -268,21 +308,13 @@ class rob_state_ndi:
 
         # store closest points in appropriate array
         query_closest = np.argmin(q_distances[0])
-        closest = np.array([q_distances[0][query_closest], q_distances[1][query_closest], data.sim_time])
+        closest = np.array([q_distances[0][query_closest], q_distances[1][query_closest], data.header.stamp.to_sec()])
         self.roll_dist = np.vstack((self.roll_dist,closest))
         # print(closest[0])
 
         # create the new roll frame
         # need to publish for other psm if bimanual
         if self.bimanual_topic is not None:
-            self.roll_frame.position.x = x
-            self.roll_frame.position.y = y
-            self.roll_frame.position.z = z
-
-            self.roll_frame.orientation.x = xw
-            self.roll_frame.orientation.y = yw
-            self.roll_frame.orientation.z = zw
-            self.roll_frame.orientation.w = ww
 
             self.roll_pub.publish(self.roll_frame)
 
@@ -301,7 +333,8 @@ class rob_state_ndi:
             bim_vec = None
 
         self.cylinder_pub.pose = self.roll_frame
-        self.cylinder_cmd.publish(self.cylinder_cmd)
+        #print(self.cylinder_pub.pose)
+        self.cylinder_cmd.publish(self.cylinder_pub)
         wrench, mag = self.calc_force(q_distances, q_points, bim_vec = bim_vec) # remember to update MTM publisher with wrench info!
 
         if self.force_pub == True:
@@ -314,7 +347,7 @@ class rob_state_ndi:
             self.force_cmd.publish(w_stamped)
 
         if self.force_vis == True:
-            mag_stamp = np.array([mag, data.sim_time])
+            mag_stamp = np.array([mag, data.header.stamp.to_sec()])
             self.fmag_list = np.vstack((self.fmag_list, mag_stamp))
 
         # update surface sphere pos based on KD_tree query
@@ -379,7 +412,7 @@ class rob_state_ndi:
             self.sphere_cmd = rospy.Publisher(name='/ambf/env/Icosphere' + str(self.psmnum) +'/Command', data_class=RigidBodyCmd, tcp_nodelay=True, queue_size=10)
 
         if self.force_pub == True:
-            if self.psmnum == 1:
+            if self.psmnum == 2:
                 mtm_label = '/MTML/'
             else:
                 mtm_label = '/MTMR/'
@@ -394,8 +427,8 @@ class rob_state_ndi:
 
         #if self.force_vis = True:
 
-        self.cylinder_cmd = rospy.Publisher(name='/ambf/env/Cylinder/Command', data_class=RigidBodyCmd, tcp_nodelay=True, queue_size=10)
-
+        self.cylinder_cmd = rospy.Publisher(name='/ambf/env/Cylinder' + str(self.psmnum) +'/Command', data_class=RigidBodyCmd, tcp_nodelay=True, queue_size=10)
+        print(self.cylinder_cmd.name)
 
         # VF logic, only do this at 5 Hz to not slow down sim
         rate = rospy.Rate(5)
