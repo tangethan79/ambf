@@ -22,6 +22,7 @@ from ambf_ros_modules.vf_fields_pkg.scripts.robot_ndi import rob_state_ndi
 if __name__ == '__main__':
     parser = ArgumentParser()
     parser.add_argument('--arm', type=int)
+    parser.add_argument('--adf', type=int)
     parser.add_argument('--bimanual', type=int)
     parser.add_argument('--ndi', action='store_true')
     parser.set_defaults(ndi = False)

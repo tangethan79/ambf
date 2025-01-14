@@ -8,7 +8,7 @@
 import dvrk
 # these two packages control reading and writing dvrk joint vals
 
-from collections import deque
+from trimesh import proximity
 
 # ros and ambf imports
 import rospy
@@ -34,7 +34,7 @@ rospack = rospkg.RosPack()
 VF_path = rospack.get_path('vf_fields_pkg')
 
 class rob_state_ndi:
-    def __init__(self, tree, psmnum = 2, surface_sphere = True, force_vis = False, force_pub = False, bimanual = 0, sdf = False):
+    def __init__(self, tree, psmnum = 2, surface_sphere = True, force_vis = False, force_pub = True, bimanual = 0, sdf = False):
         self.cleft_p = np.array([-0.93998,0.003,1.05936]).reshape(3,1)
         cleft_R = R.from_euler('xyz', [1.85791,-0.2802,2.27472])
         self.cleft_R = cleft_R.as_matrix()
@@ -42,6 +42,12 @@ class rob_state_ndi:
         pad = np.array([0,0,0,1])
         self.cleft_pose = np.hstack((self.cleft_R,self.cleft_p))
         self.cleft_pose = np.vstack((self.cleft_pose, pad))
+
+        #initialize ecm pose
+        self.ECM_pose = np.array([[1,0,0,0],
+                                 [0,1,0,0],
+                                 [0,0,1,0],
+                                 [0,0,0,1]])
 
         self.psmnum = psmnum
 
@@ -53,14 +59,20 @@ class rob_state_ndi:
         # this has been updated to take the pose of the NDI tracker which we assume is at the tip of the robot with at least one axis lining up with the roll axis
         # we also assume that this pose is wrt the cleft pose
         # in callback, we need to deal with scaling and add static pose offset imposed by blender cleft model (x = -9.3998 cm, y = 0.0301 cm, z = 10.594 cm)
-        self.topic_dict = {'/NDI/' + self.toolname + '/measured_cp': {'data': None, 'type': PoseStamped}}
+        
+        if psmnum == 1:
+            mtm_hand = "R"
+        else:
+            mtm_hand = "L"
+        self.topic_dict = {'/NDI/' + self.toolname + '/measured_cp': {'data': None, 'type': PoseStamped, 'arm':'PSM'},
+                           '/NDI/ECM/measured_cp': {'data': None, 'type': PoseStamped, 'arm':'ECM'},
+                           '/MTM'+ mtm_hand+'/measured_cp': {'data': None, 'type': PoseStamped, 'arm':'MTM'}}
 
         # need y axis to align with roll joint
 
         self.bimanual_topic = None
 
         self.roll_frame = Pose()
-        self.roll_vel_queue = deque(maxlen=10) # max number of entries for sliding average filter
         self.roll_vel = None # the current value of the linear velocity
         self.prev_pose = None
         self.prev_time = None
@@ -78,9 +90,9 @@ class rob_state_ndi:
         else:
             self.sdf = tree
 
-        self.roll_start_dist = 1.476
+        self.roll_start_dist = 0
         # self.roll_end_dist = 2.168
-        self.roll_end_dist = 1.8 # shortened to have haptics apply further back
+        self.roll_end_dist = 3.2 # shortened to have haptics apply further back
 
         # running variables keeping track of position and distances of various bodies
         # note that each dist variable keeps track of distance and timestamp
@@ -105,9 +117,9 @@ class rob_state_ndi:
         self.fmag_list = np.empty([0,2])
 
         # maximum distance until manipulator experiences force
-        self.dmax = 0.25
+        self.dmax = 0.11
         # saturation cutoff for force generation
-        self.force_sat = 5
+        self.force_sat = 3
 
         # mesh indicator tracking closest point
         self.surface_sphere = surface_sphere
@@ -130,14 +142,18 @@ class rob_state_ndi:
         self.plot_roll = False
         self.plot_force_mag = True
 
+        # time threshold for velocity calculations, messages are only processed if this amount of time has passed
+        self.time_threshold = 0.05
+
     def vec_to_force(self, v_p, dist):
+        #print(dist)
         # parallel component of distance vector
-        v_par = (np.dot(v_p, self.roll_y_axis)/np.dot(self.roll_y_axis,self.roll_y_axis)) * self.roll_y_axis
+        v_par = (np.dot(v_p, self.ECM_z)/np.dot(self.ECM_z,self.ECM_z)) * self.ECM_z
 
         # perpendicular component of force then normalized
         v_perp = v_p-v_par
         v_perp = v_perp/np.linalg.norm(v_perp)
-
+        #print(v_perp)
         # scale force according to inverse square law, reverse how gravity works
         if dist < self.dmax:
             f_scale = np.sqrt((self.dmax - dist)/self.dmax)
@@ -150,27 +166,36 @@ class rob_state_ndi:
 
 
         f = v_perp*v_scale*f_scale
+
+        f = np.matmul(np.linalg.inv(self.ECM_pose[:3,:3]),f.reshape(3,1))
+
+        # force direction was wrong, this is 180 degree rotation about x axis
+        flip_mat = np.array([[1,0,0],
+                             [0,-1,0],
+                             [0,0,-1]])
+
+        f = np.matmul(flip_mat,f)
+        f = np.matmul(np.linalg.inv(self.MTM_R),f)
+        #print(dist, np.linalg.norm(f))
         return f
 
-    def calc_force(self, q_distances, q_points, bim_vec = None):
+    def calc_force(self, roll_point, mouth_point, bim_vec = None):
         # this initializes at 0 for both force and torque
         wrench_vec = Wrench()
 
-        # add force components for each close point
-        for i in range(len(q_distances[0])):
-            # note both roll points and tree points are row vectors not column
-            mesh_coord = self.tree_obj.data[q_distances[1][i]]
 
-            v_p = np.transpose(q_points[i]-mesh_coord)
+        # add force components for closest point
+        v_p = np.transpose(roll_point - mouth_point)
+        #print(v_p)
 
-            f = self.vec_to_force(v_p, q_distances[0][i])
+        f = self.vec_to_force(v_p, np.linalg.norm(v_p))
 
-            # add effects of points together in wrench
+        # add effects of point in wrench
 
 
-            wrench_vec.force.x += f[0]
-            wrench_vec.force.y += f[1]
-            wrench_vec.force.z += f[2]
+        wrench_vec.force.x += f[0]
+        wrench_vec.force.y += f[1]
+        wrench_vec.force.z += f[2]
 
         # if bimanual forces are enabled, we know the last entry corresponds to the bimanual effects
         # we multiply this by 3 to scale it up to a similar degree as the cup interactions
@@ -229,7 +254,7 @@ class rob_state_ndi:
         PSM_pose = np.hstack((PSM_R.as_matrix(),PSM_p))
         PSM_pose = np.vstack((PSM_pose, np.array([0,0,0,1])))
         #print(PSM_pose,self.cleft_pose)
-        PSM_pose = np.matmul(self.cleft_pose,PSM_pose,)
+        PSM_pose = np.matmul(self.cleft_pose,PSM_pose)
         #print(PSM_pose)
         x = PSM_pose[0,3]
         y = PSM_pose[1,3]
@@ -261,25 +286,22 @@ class rob_state_ndi:
         # the stuff below doesn't work \/ \/ \/ \/!!! FIX IT DUMBASS!!!
         curr_time = data.header.stamp.to_sec()
         curr_pose = PSM_p
+        #print(curr_pose)
         if self.prev_pose is not None and self.prev_time is not None:
             del_pose = curr_pose - self.prev_pose
-            del_time = self.prev_time - curr_time
-            if del_time > 0:
-                vel = del_pose/del_time
-                self.roll_vel_queue.append(vel.reshape(3,1))
-                self.roll_vel = np.mean(np.hstack(self.roll_vel_queue), axis=1)
+            del_time = curr_time - self.prev_time
+            if del_time > self.time_threshold:
+                self.roll_vel = 10*del_pose/del_time
+                # this now has units of dcm/seconds
+
+                self.roll_vel = self.roll_vel.reshape((1,3))
+
+                self.prev_pose = curr_pose
+                self.prev_time = curr_time
                 #print(self.roll_vel)
-                self.roll_vel.reshape(3,1)
-            else:
-                vel = np.array([0, 0, 0])
-                self.roll_vel_queue.append(vel.reshape(3,1))
-                self.roll_vel = vel
-                self.roll_vel.reshape(3,1)
         else:
-            vel = np.array([0, 0, 0])
-            self.roll_vel_queue.append(vel.reshape(3,1))
-            self.roll_vel = vel
-            self.roll_vel.reshape(3,1)
+            self.prev_pose = curr_pose
+            self.prev_time = curr_time
 
         # if velocity calculation could be wrong for any reason, stop and set it to zero
         # this is additionally added to the queue so that the starting velocities don't jump
@@ -320,7 +342,7 @@ class rob_state_ndi:
             closest = np.array([q_distances[0][query_closest], q_distances[1][query_closest], data.header.stamp.to_sec()])
             self.roll_dist = np.vstack((self.roll_dist,closest))
         else:
-            grad_vec, dist = self.sdf.query_SDF_grad(q_points)
+            grad_vec, dist, closest = self.sdf.query_SDF_grad(q_points)
         # print(closest[0])
 
         # create the new roll frame
@@ -347,7 +369,7 @@ class rob_state_ndi:
         #print(self.cylinder_pub.pose)
         self.cylinder_cmd.publish(self.cylinder_pub)
         if self.sdf_flag is False:
-            wrench, mag = self.calc_force(q_distances, q_points, bim_vec = bim_vec) # remember to update MTM publisher with wrench info!
+            wrench, mag = self.calc_force(q_points[query_closest], self.tree_obj.data[q_distances[1][query_closest]], bim_vec = bim_vec) # remember to update MTM publisher with wrench info!
         else:
             wrench, mag = self.calc_force_sdf(grad_vec, dist, bim_vec = bim_vec)
 
@@ -366,7 +388,12 @@ class rob_state_ndi:
 
         # update surface sphere pos based on KD_tree query
         if self.surface_sphere == True:
-            mesh_coord = self.tree_obj.data[q_distances[1][query_closest]]
+            if self.sdf_flag is False:
+                mesh_coord = self.tree_obj.data[q_distances[1][query_closest]]
+            else:
+                meshes, __ , __ = proximity.closest_point(self.sdf.mesh, closest.reshape(1,-1))
+                mesh_coord = meshes[0]
+            
             self.sphere_pub.pose.position.x = mesh_coord[0]
             self.sphere_pub.pose.position.y = mesh_coord[1]
             self.sphere_pub.pose.position.z = mesh_coord[2]
@@ -447,12 +474,33 @@ class rob_state_ndi:
             plt.show()
 
 
+    def ECM_callback(self, data, args):
+        ECM_p = np.array([data.pose.position.x*10,data.pose.position.y*10,data.pose.position.z*10]).reshape(3,1)
+        ECM_R = R.from_quat([data.pose.orientation.x,data.pose.orientation.y,data.pose.orientation.z,data.pose.orientation.w])
+        ECM_pose = np.hstack((ECM_R.as_matrix(),ECM_p))
+        ECM_pose = np.vstack((ECM_pose, np.array([0,0,0,1])))
+        self.ECM_pose = np.matmul(self.cleft_pose,ECM_pose)
+        self.ECM_z = self.ECM_pose[:3, 2]
+        
+        # consider adding a a transform here which rotates ECM pose by 45 deg about y axis for tilted ECM config
+
+
+    def MTM_callback(self, data, args):
+        MTM_R = R.from_quat([data.pose.orientation.x,data.pose.orientation.y,data.pose.orientation.z,data.pose.orientation.w])
+        self.MTM_R = MTM_R.as_matrix()
+
+
     def listener(self):
         rospy.init_node(self.nodename, anonymous = True)
 
         # generate subscriber topic for controlled arm
         for key in self.topic_dict:
-            rospy.Subscriber(name = key, data_class=self.topic_dict[key]["type"], callback=self.callback, callback_args=key)
+            if self.topic_dict[key]["arm"] == "PSM":
+                rospy.Subscriber(name = key, data_class=self.topic_dict[key]["type"], callback=self.callback, callback_args=key)
+            elif self.topic_dict[key]["arm"] == "ECM":
+                rospy.Subscriber(name = key, data_class=self.topic_dict[key]["type"], callback=self.ECM_callback, callback_args=key)
+            elif self.topic_dict[key]["arm"] == "MTM":
+                rospy.Subscriber(name = key, data_class=self.topic_dict[key]["type"], callback=self.MTM_callback, callback_args=key)
         rospy.on_shutdown(self.cleanup)
 
         # update this to work with multiple spheres
@@ -461,9 +509,9 @@ class rob_state_ndi:
 
         if self.force_pub == True:
             if self.psmnum == 2:
-                mtm_label = '/MTML/'
+                mtm_label = '/MTML_PSM2/following/mtm/'
             else:
-                mtm_label = '/MTMR/'
+                mtm_label = '/MTMR_PSM1/following/mtm/'
             self.force_cmd = rospy.Publisher(name=mtm_label + 'body/servo_cf', data_class=WrenchStamped, tcp_nodelay=True, queue_size=10)
 
 

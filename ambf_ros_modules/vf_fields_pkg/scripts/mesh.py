@@ -1,5 +1,7 @@
 
 import rospkg
+import trimesh
+from pysdf import SDF
 
 #mesh and model libraries
 import numpy as np
@@ -17,7 +19,7 @@ rospack = rospkg.RosPack()
 VF_path = rospack.get_path('vf_fields_pkg')
 
 class MeshObj:
-    def __init__(self, adf_num = None, body_index = None, stl_num = None):
+    def __init__(self, adf_num = None, body_index = None, stl_num = None, sdf = False):
         yaml_list = ['mouth_cup.yaml','scan_aperture.yaml','open_oral_cavity.yaml','mouth_cup.yaml', 'mouth_cup_v2.yaml', 'suture_box.yaml']
         stl_list = ['mouth cup.STL','cleft_retracted_june_7.STL','Complete_remeshed.STL','mouth cup smooth.STL', 'mouth cup v2 no holes.STL']
         if adf_num:
@@ -52,25 +54,28 @@ class MeshObj:
 
 
     def get_stl_trimesh(self):
-        mouth = trimesh.load(self.stl_str)
+        self.mesh = trimesh.load(self.stl_str)
         self.get_pose_homog()
-        mouth.apply_transform(self.homog)
-        self.SDF = SDF(mouth.vertices, mouth.faces)
+        self.mesh.apply_transform(self.homog)
+        self.SDF = SDF(self.mesh.vertices, self.mesh.faces)
 
 
     def query_SDF_grad(self, points):
         query = self.SDF(points)
         #print(query)
-        negative = np.where(query <=0)[0]
         if query.size > 0:
-            closest_index_negative = np.argmax(query[negative])
-            closest_index = negative[closest_index_negative]
+            if np.all(query <= 0):
+                query = np.abs(query)
+            closest_index = np.argmin(query)
             #print(points[closest_index,:])
             grad = self.compute_sdf_gradient(points[closest_index,:])
-            #print(-1*grad)
-            return -1*grad, negative[closest_index_negative]
+            if query[closest_index] < 0:
+                grad = -grad
+            
+            # convert distance to appropriate units
+            return -grad, query[closest_index], points[closest_index,:]
         else:
-            return False, False
+            return False, False, False
 
 
     def compute_sdf_gradient(self, point, epsilon=1e-5):
