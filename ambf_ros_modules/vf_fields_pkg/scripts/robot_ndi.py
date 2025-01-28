@@ -28,12 +28,16 @@ from scipy.spatial.transform import Rotation as R
 from collections import deque
 
 
-#plotting libraries
+#plotting and data libraries
 from matplotlib import pyplot as plt
-
+import json
+import os
+import datetime
 
 rospack = rospkg.RosPack()
 VF_path = rospack.get_path('vf_fields_pkg')
+logs_path = os.path.join(VF_path, 'logs')
+
 
 def butter_lowpass(cutoff, fs, order=2):
     nyquist = 0.5 * fs
@@ -41,9 +45,22 @@ def butter_lowpass(cutoff, fs, order=2):
     b, a = butter(order, normal_cutoff, btype='low', analog=False)
     return b, a
 
+
 # Apply the filter to 3D force vectors
 def apply_filter(b, a, force_history):
     return filtfilt(b, a, force_history, axis=0, method="gust")
+
+
+def convert_np_to_list(data):
+    if isinstance(data, dict):
+        return {k: convert_np_to_list(v) for k, v in data.items()}
+    elif isinstance(data, list):
+        return [convert_np_to_list(i) for i in data]
+    elif isinstance(data, np.ndarray):
+        return data.tolist()
+    else:
+        return data
+
 
 class rob_state_ndi:
     def __init__(self, tree, psmnum = 2, cylinder_update = False, surface_sphere = False, force_vis = True, force_pub = False, bimanual = 0, sdf = False, launch = False):
@@ -507,7 +524,7 @@ class rob_state_ndi:
             self.force_cmd.publish(w_stamped)
 
         if self.force_vis == True:
-            mag_stamp = np.array([mag, data.header.stamp.to_sec()])
+            mag_stamp = np.array([mag, dist, data.header.stamp.to_sec()])
             self.fmag_list = np.vstack((self.fmag_list, mag_stamp))
 
         # update surface sphere pos based on KD_tree query
@@ -547,6 +564,14 @@ class rob_state_ndi:
             plt.show()
 
         elif self.plot_force_mag:
+            date_str = datetime.date.today().strftime('%y-%m-%d')
+            today_dir_str = os.path.join(logs_path, date_str)
+
+            if not os.path.exists(today_dir_str):
+                os.mkdir(today_dir_str)
+
+            time_str = datetime.now.strftime("%H:%M:%S")
+
             # shift distance values to zero seconds starting at program start
             oldest_time = self.fmag_list[0][1]
             self.fmag_list[:, -1] -= oldest_time
@@ -557,6 +582,14 @@ class rob_state_ndi:
 
             f_timestamp = self.fmag_list[:, -1]
             mag_list = self.fmag_list[:, 0]
+
+            results_dict = {'timestamp':self.fmag_list[:,2],'forces':self.fmag_list[:,0],'distance':self.fmag_list[:,0]}
+            results_dict = convert_np_to_list(results_dict) # convert results dictionary into list format for json writing
+
+
+            json_file_path = os.path.join(today_dir_str, time_str) + '.json' # create new json file in today's log directory with timestamp as filename
+            with open(json_file_path, "w") as json_file:
+                json.dump(results_dict, json_file, indent=4)
 
             fig, ax = plt.subplots()
             plt.plot(f_timestamp, mag_list, 'r')
