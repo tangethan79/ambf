@@ -5,6 +5,8 @@
 
 # ros and ambf imports
 import rospy
+import os
+import sys
 import rospkg
 #import time
 #from ambf_client import Client
@@ -12,11 +14,13 @@ from argparse import ArgumentParser
 
 rospack = rospkg.RosPack()
 VF_path = rospack.get_path('vf_fields_pkg')
+scripts_path = os.path.join(VF_path, 'scripts')
+sys.path.append(scripts_path)
 
 # constructed classes
 from mesh import MeshObj
-from ambf_ros_modules.vf_fields_pkg.scripts.robot_ambf import rob_state
-from ambf_ros_modules.vf_fields_pkg.scripts.robot_ndi import rob_state_ndi
+from robot_ambf import rob_state
+from robot_ndi import rob_state_ndi
 
 
 if __name__ == '__main__':
@@ -28,6 +32,10 @@ if __name__ == '__main__':
     parser.set_defaults(ndi = False)
     parser.add_argument('--sdf', action='store_true')
     parser.set_defaults(sdf = False)
+    parser.add_argument('--haptic', action='store_true')
+    parser.set_defaults(haptic = False)
+    parser.add_argument('--launch', action='store_true') # nodes started from launch file, use throttled topics for ecm
+    parser.set_defaults(haptic = False)
     args, _ = parser.parse_known_args()
 
     if args.arm is None:
@@ -44,13 +52,13 @@ if __name__ == '__main__':
         print(tree.tree.data[0])
         
         if args.ndi is True:
-            psm_listener = rob_state_ndi(tree.tree, psmnum = args.arm, bimanual = args.bimanual)
+            psm_listener = rob_state_ndi(tree.tree, psmnum = args.arm, bimanual = args.bimanual, force_pub=args.haptic, launch = args.launch)
         else:
             # initialize the listener subscriber with the known tree mesh info
-            psm_listener = rob_state(tree.tree, psmnum = args.arm, bimanual = args.bimanual)
+            psm_listener = rob_state(tree.tree, psmnum = args.arm, bimanual = args.bimanual, force_pub=args.haptic)
     else:
         sdf = MeshObj(adf_num = args.adf, sdf = True)
-        psm_listener = rob_state_ndi(sdf, psmnum = args.arm, bimanual = args.bimanual, sdf = True)
+        psm_listener = rob_state_ndi(sdf, psmnum = args.arm, bimanual = args.bimanual, sdf = True, force_pub=args.haptic, launch = args.launch)
 
 
     # start the main subscriber loop for each arm

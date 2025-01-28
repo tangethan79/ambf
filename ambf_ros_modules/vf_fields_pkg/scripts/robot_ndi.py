@@ -23,7 +23,9 @@ from std_msgs.msg import Header
 #mesh and model libraries
 import numpy as np
 from scipy import spatial
+from scipy.signal import butter, filtfilt
 from scipy.spatial.transform import Rotation as R
+from collections import deque
 
 
 #plotting libraries
@@ -33,8 +35,35 @@ from matplotlib import pyplot as plt
 rospack = rospkg.RosPack()
 VF_path = rospack.get_path('vf_fields_pkg')
 
+def butter_lowpass(cutoff, fs, order=2):
+    nyquist = 0.5 * fs
+    normal_cutoff = cutoff / nyquist
+    b, a = butter(order, normal_cutoff, btype='low', analog=False)
+    return b, a
+
+# Apply the filter to 3D force vectors
+def apply_filter(b, a, force_history):
+    return filtfilt(b, a, force_history, axis=0, method="gust")
+
 class rob_state_ndi:
-    def __init__(self, tree, psmnum = 2, surface_sphere = True, force_vis = False, force_pub = True, bimanual = 0, sdf = False):
+    def __init__(self, tree, psmnum = 2, cylinder_update = False, surface_sphere = False, force_vis = True, force_pub = False, bimanual = 0, sdf = False, launch = False):
+        if launch == True:
+            ndi_ecm_str = '/NDI_ECM'
+            dvrk_ecm_str = '/DVRK_ECM'
+        else:
+            ndi_ecm_str = '/NDI/ECM/measured_cp'
+            dvrk_ecm_str = '/ECM/measured_cp'
+
+
+        self.cylinder_update = cylinder_update
+
+        self.last_valid_norm = None
+        self.cutoff_freq = 0.05
+        self.sampling_rate = 50 # appx. publishing rate of force
+        self.b, self.a = butter_lowpass(self.cutoff_freq, self.sampling_rate)
+
+        self.force_history = deque(maxlen=20)
+
         self.cleft_p = np.array([-0.93998,0.003,1.05936]).reshape(3,1)
         cleft_R = R.from_euler('xyz', [1.85791,-0.2802,2.27472])
         self.cleft_R = cleft_R.as_matrix()
@@ -65,8 +94,11 @@ class rob_state_ndi:
         else:
             mtm_hand = "L"
         self.topic_dict = {'/NDI/' + self.toolname + '/measured_cp': {'data': None, 'type': PoseStamped, 'arm':'PSM'},
-                           '/NDI/ECM/measured_cp': {'data': None, 'type': PoseStamped, 'arm':'ECM'},
-                           '/MTM'+ mtm_hand+'/measured_cp': {'data': None, 'type': PoseStamped, 'arm':'MTM'}}
+                           ndi_ecm_str: {'data': None, 'type': PoseStamped, 'arm':'ECM'},
+                           '/MTM'+ mtm_hand+'/measured_cp': {'data': None, 'type': PoseStamped, 'arm':'MTM_P'},
+                           '/PSM'+ str(psmnum)+'/spatial/measured_cf': {'data': None, 'type': WrenchStamped, 'arm':'PSM_F'},
+                           '/PSM'+ str(psmnum)+'/measured_cp': {'data': None, 'type': PoseStamped, 'arm':'PSM_P_DVRK'},
+                           dvrk_ecm_str: {'data': None, 'type': PoseStamped, 'arm':'ECM_P_DVRK'}}
 
         # need y axis to align with roll joint
 
@@ -117,9 +149,10 @@ class rob_state_ndi:
         self.fmag_list = np.empty([0,2])
 
         # maximum distance until manipulator experiences force
-        self.dmax = 0.11
+        self.dmax = 0.05
+        self.wall_thresh = 0.02
         # saturation cutoff for force generation
-        self.force_sat = 3
+        self.force_sat = 3.5
 
         # mesh indicator tracking closest point
         self.surface_sphere = surface_sphere
@@ -145,39 +178,129 @@ class rob_state_ndi:
         # time threshold for velocity calculations, messages are only processed if this amount of time has passed
         self.time_threshold = 0.05
 
+
+    def calc_force_sdf(self, grad, dist, bim_vec = None):
+        # this initializes at 0 for both force and torque
+        wrench_vec = Wrench()
+
+        f, wall = self.vec_to_force(grad, dist)
+
+        # add effects of points together in wrench
+        wrench_vec.force.x += f[0]
+        wrench_vec.force.y += f[1]
+        wrench_vec.force.z += f[2]
+
+        if self.bimanual_topic is not None:
+            f = self.vec_to_force(bim_vec, np.linalg.norm(bim_vec))*0.7
+            wrench_vec.force.x += f[0]
+            wrench_vec.force.y += f[1]
+            wrench_vec.force.z += f[2]
+
+        linear_force = [wrench_vec.force.x, wrench_vec.force.y, wrench_vec.force.z]
+        lin_norm = np.linalg.norm([wrench_vec.force.x, wrench_vec.force.y, wrench_vec.force.z])
+
+        # check if force has reached saturation cutoff
+        if lin_norm > self.force_sat and wall == False:
+            linear_force = self.force_sat*(linear_force/lin_norm)
+            wrench_vec.force.x = linear_force[0]
+            wrench_vec.force.y = linear_force[1]
+            wrench_vec.force.z = linear_force[2]
+
+            mag = self.force_sat
+        else:
+            mag = lin_norm
+
+        return wrench_vec, mag
+
+
+    def sqrt_force(self, dist):
+        f_scale = np.sqrt(abs(self.dmax - dist)/self.dmax)* self.force_sat
+        return f_scale
+    
+
+    def exp_force(self, dist):
+        if dist < 0:
+            dist = 0
+        f_scale = np.exp(-20*dist)*self.force_sat
+        return f_scale
+
+
     def vec_to_force(self, v_p, dist):
         #print(dist)
+
+        PSM_f = np.array([self.PSM_F.x, self.PSM_F.y, self.PSM_F.z]).reshape(3,1)
+        PSM_f = np.matmul(np.linalg.inv(self.ECM_R_dVRK),PSM_f)
         # parallel component of distance vector
         v_par = (np.dot(v_p, self.ECM_z)/np.dot(self.ECM_z,self.ECM_z)) * self.ECM_z
 
         # perpendicular component of force then normalized
         v_perp = v_p-v_par
-        v_perp = v_perp/np.linalg.norm(v_perp)
-        #print(v_perp)
+        f = v_perp/np.linalg.norm(v_perp)
+        fmul = f.reshape(3,1)
+
+        if dist < self.wall_thresh: # or np.sqrt(self.PSM_F.x**2 + self.PSM_F.y**2 + self.PSM_F.z**2) > 2:
+
+            # ECM alignment
+            z_rot = np.array([[0,-1,0],
+                              [1,0,0],
+                              [0,0,-1]])
+            PSM_f = np.matmul(z_rot,PSM_f)
+            f = (np.dot(PSM_f.T, fmul)/np.dot(fmul.T, fmul)) * fmul
+            f = f/np.linalg.norm(f)
+            # modify f here and replace with sensed psm force
+            wall = True
+            #print(wall)
+        else:
+            #ECM alignment
+            wall = False
+
         # scale force according to inverse square law, reverse how gravity works
-        if dist < self.dmax:
-            f_scale = np.sqrt((self.dmax - dist)/self.dmax)
+        if dist < self.dmax or wall == True:
+            if np.sqrt(self.PSM_F.x**2 + self.PSM_F.y**2 + self.PSM_F.z**2) > self.force_sat and dist < self.wall_thresh:
+                f_scale = self.force_sat
+            else:
+                #f_scale = self.exp_force(dist)
+                f_scale = self.sqrt_force(dist)
 
             # scale force according to velocity vector alignment with offset
-            v_scale = (np.dot(self.roll_vel, v_perp)*0.5)+1
+            v_scale = (np.dot(self.roll_vel, f)*0.5)+1
+
         else:
             f_scale = 0
             v_scale = 0
-
-
-        f = v_perp*v_scale*f_scale
+        
+        if wall == False: # and np.dot(PSM_f.T, fmul) > 0:
+            self.last_valid_norm = f
+        else:
+            f = self.last_valid_norm
 
         f = np.matmul(np.linalg.inv(self.ECM_pose[:3,:3]),f.reshape(3,1))
+        f = f*f_scale*v_scale
 
         # force direction was wrong, this is 180 degree rotation about x axis
-        flip_mat = np.array([[1,0,0],
-                             [0,-1,0],
-                             [0,0,-1]])
+        flip_mat = np.array([[-1,0,0],
+                            [0,-1,0],
+                            [0,0,1]])
 
         f = np.matmul(flip_mat,f)
+
+        self.force_history.append(f)
+
+        # Only apply the filter when we have enough data points
+        if len(self.force_history) >= 2:
+            # Apply the Butterworth filter to smooth the forces
+            # try out some new filtering techniques, this doesn't work too good
+            filtered_force = apply_filter(self.b, self.a, list(self.force_history))
+            f = filtered_force[-1]
+            #print(f)
+
+    
+        #f = np.array([0,2,0]).reshape(3,1)
+
+        # replace below check with psm force threshold
         f = np.matmul(np.linalg.inv(self.MTM_R),f)
         #print(dist, np.linalg.norm(f))
-        return f
+        return f, wall
 
     def calc_force(self, roll_point, mouth_point, bim_vec = None):
         # this initializes at 0 for both force and torque
@@ -188,7 +311,7 @@ class rob_state_ndi:
         v_p = np.transpose(roll_point - mouth_point)
         #print(v_p)
 
-        f = self.vec_to_force(v_p, np.linalg.norm(v_p))
+        f, wall = self.vec_to_force(v_p, np.linalg.norm(v_p))
 
         # add effects of point in wrench
 
@@ -222,11 +345,11 @@ class rob_state_ndi:
         return wrench_vec, mag
     
     def callback_bim(self, data, args):
-        x = data.pose.position.x
-        y = data.pose.position.y
-        z = data.pose.position.z
+        x = data.position.x
+        y = data.position.y
+        z = data.position.z
         bim_roll_position = np.array([x,y,z])
-        rollframe = R.from_quat([data.pose.orientation.x, data.pose.orientation.y, data.pose.orientation.z, data.pose.orientation.w])
+        rollframe = R.from_quat([data.orientation.x, data.orientation.y, data.orientation.z, data.orientation.w])
         rollframe = rollframe.as_matrix()
         bim_roll_y_axis = rollframe[:,1]
 
@@ -365,9 +488,10 @@ class rob_state_ndi:
         else:
             bim_vec = None
 
-        self.cylinder_pub.pose = self.roll_frame
-        #print(self.cylinder_pub.pose)
-        self.cylinder_cmd.publish(self.cylinder_pub)
+        if self.cylinder_update:
+            self.cylinder_pub.pose = self.roll_frame
+            #print(self.cylinder_pub.pose)
+            self.cylinder_cmd.publish(self.cylinder_pub)
         if self.sdf_flag is False:
             wrench, mag = self.calc_force(q_points[query_closest], self.tree_obj.data[q_distances[1][query_closest]], bim_vec = bim_vec) # remember to update MTM publisher with wrench info!
         else:
@@ -400,41 +524,6 @@ class rob_state_ndi:
 
             self.sphere_cmd.publish(self.sphere_pub)
                 
-
-    def calc_force_sdf(self, grad, dist, bim_vec = None):
-        # this initializes at 0 for both force and torque
-        wrench_vec = Wrench()
-
-        f = self.vec_to_force(grad, dist)
-
-        # add effects of points together in wrench
-        wrench_vec.force.x += f[0]
-        wrench_vec.force.y += f[1]
-        wrench_vec.force.z += f[2]
-
-        if self.bimanual_topic is not None:
-            f = self.vec_to_force(bim_vec, np.linalg.norm(bim_vec))*3
-            wrench_vec.force.x += f[0]
-            wrench_vec.force.y += f[1]
-            wrench_vec.force.z += f[2]
-
-        linear_force = [wrench_vec.force.x, wrench_vec.force.y, wrench_vec.force.z]
-        lin_norm = np.linalg.norm([wrench_vec.force.x, wrench_vec.force.y, wrench_vec.force.z])
-
-        # check if force has reached saturation cutoff
-        if lin_norm > self.force_sat:
-            linear_force = self.force_sat*(linear_force/lin_norm)
-            wrench_vec.force.x = linear_force[0]
-            wrench_vec.force.y = linear_force[1]
-            wrench_vec.force.z = linear_force[2]
-
-            mag = self.force_sat
-        else:
-            mag = lin_norm
-
-        return wrench_vec, mag
-
-
 
     def cleanup(self):
         # execute on finish
@@ -485,9 +574,27 @@ class rob_state_ndi:
         # consider adding a a transform here which rotates ECM pose by 45 deg about y axis for tilted ECM config
 
 
-    def MTM_callback(self, data, args):
+    def MTM_P_callback(self, data, args):
         MTM_R = R.from_quat([data.pose.orientation.x,data.pose.orientation.y,data.pose.orientation.z,data.pose.orientation.w])
         self.MTM_R = MTM_R.as_matrix()
+
+    # topics for taking joint data from dVRK to translate into forces
+
+    def PSM_F_callback(self, data, args):
+        self.PSM_F = data.wrench.force
+
+    def PSM_P_DVRK_callback(self, data, args):
+        self.PSM_P_DVRK = data.pose
+
+    def ECM_P_DVRK_callback(self, data, args):
+        # 45 degree rotation only needed if endoscope not aligned properly
+        # typically we use HD_DOWN for this experiment
+        r = R.from_quat([data.pose.orientation.x,data.pose.orientation.y,data.pose.orientation.z,data.pose.orientation.w])
+        """tilt_rotation = np.array([[1, 0, 0],
+                                  [0, 0.70710678, -0.70710678],
+                                  [0, 0.7071068, 0.7071068]])
+        self.ECM_R_dVRK = np.matmul(r.as_matrix(),tilt_rotation)"""
+        self.ECM_R_dVRK = r.as_matrix()
 
 
     def listener(self):
@@ -499,8 +606,14 @@ class rob_state_ndi:
                 rospy.Subscriber(name = key, data_class=self.topic_dict[key]["type"], callback=self.callback, callback_args=key)
             elif self.topic_dict[key]["arm"] == "ECM":
                 rospy.Subscriber(name = key, data_class=self.topic_dict[key]["type"], callback=self.ECM_callback, callback_args=key)
-            elif self.topic_dict[key]["arm"] == "MTM":
-                rospy.Subscriber(name = key, data_class=self.topic_dict[key]["type"], callback=self.MTM_callback, callback_args=key)
+            elif self.topic_dict[key]["arm"] == "MTM_P":
+                rospy.Subscriber(name = key, data_class=self.topic_dict[key]["type"], callback=self.MTM_P_callback, callback_args=key)
+            elif self.topic_dict[key]["arm"] == "PSM_F":
+                rospy.Subscriber(name = key, data_class=self.topic_dict[key]["type"], callback=self.PSM_F_callback, callback_args=key)
+            elif self.topic_dict[key]["arm"] == "PSM_P_DVRK":
+                rospy.Subscriber(name = key, data_class=self.topic_dict[key]["type"], callback=self.PSM_P_DVRK_callback, callback_args=key)
+            elif self.topic_dict[key]["arm"] == "ECM_P_DVRK":
+                rospy.Subscriber(name = key, data_class=self.topic_dict[key]["type"], callback=self.ECM_P_DVRK_callback, callback_args=key)
         rospy.on_shutdown(self.cleanup)
 
         # update this to work with multiple spheres
