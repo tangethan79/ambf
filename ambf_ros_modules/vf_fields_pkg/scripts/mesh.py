@@ -20,8 +20,8 @@ VF_path = rospack.get_path('vf_fields_pkg')
 
 class MeshObj:
     def __init__(self, adf_num = None, body_index = None, stl_num = None, sdf = False):
-        yaml_list = ['mouth_cup.yaml','scan_aperture.yaml','open_oral_cavity.yaml','mouth_cup.yaml', 'mouth_cup_v2.yaml', 'suture_box.yaml']
-        stl_list = ['mouth cup.STL','cleft_retracted_june_7.STL','Complete_remeshed.STL','mouth cup smooth.STL', 'mouth cup v2 no holes.STL']
+        yaml_list = ['mouth_cup.yaml','scan_aperture.yaml','open_oral_cavity.yaml','mouth_cup.yaml', 'mouth_cup_v2.yaml', 'suture_box.yaml', 'scanned_box.yaml', 'box_3cm.yaml', 'box_4cm.yaml']
+        stl_list = ['mouth cup.STL','cleft_retracted_june_7.STL','Complete_remeshed.STL','mouth cup smooth.STL', 'mouth cup v2 no holes.STL', 'Lower AntagonistScan.STL']
         if adf_num:
             self.adf_str = yaml_list[adf_num]
         else:
@@ -64,15 +64,14 @@ class MeshObj:
         query = self.SDF(points)
         #print(query)
         if query.size > 0:
-            if np.all(query <= 0):
-                query = np.abs(query)
+            query = -1*query
+            query[query<0] = np.inf
             closest_index = np.argmin(query)
             #print(points[closest_index,:])
             grad = self.compute_sdf_gradient(points[closest_index,:])
-            if query[closest_index] < 0:
-                grad = -grad
             
             # convert distance to appropriate units
+            #print(query[closest_index], grad)
             return -grad, query[closest_index], points[closest_index,:]
         else:
             return False, False, False

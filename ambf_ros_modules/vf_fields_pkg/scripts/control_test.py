@@ -47,7 +47,9 @@ if __name__ == '__main__':
     if args.adf is None:
         args.adf = 5
 
-    if args.sdf is False or args.ndi is False:
+    # Jacky: modified this if statement
+    # if args.sdf is False or args.ndi is False:
+    if args.sdf is False:
         tree = MeshObj(adf_num = args.adf)
         print(tree.tree.data[0])
         
@@ -55,10 +57,14 @@ if __name__ == '__main__':
             psm_listener = rob_state_ndi(tree.tree, psmnum = args.arm, bimanual = args.bimanual, force_pub=args.haptic, launch = args.launch)
         else:
             # initialize the listener subscriber with the known tree mesh info
-            psm_listener = rob_state(tree.tree, psmnum = args.arm, bimanual = args.bimanual, force_pub=args.haptic)
+            psm_listener = rob_state(tree.tree, psmnum = args.arm, bimanual = args.bimanual, force_pub=args.haptic, sdf=False)
     else:
         sdf = MeshObj(adf_num = args.adf, sdf = True)
-        psm_listener = rob_state_ndi(sdf, psmnum = args.arm, bimanual = args.bimanual, sdf = True, force_pub=args.haptic, launch = args.launch)
+        if args.ndi is True:
+            psm_listener = rob_state_ndi(sdf, psmnum = args.arm, bimanual = args.bimanual, sdf = True, force_pub=args.haptic, launch = args.launch)
+        else:
+            psm_listener = rob_state(tree=sdf, psmnum = args.arm, bimanual = args.bimanual, sdf = True, force_pub=args.haptic)
+            
 
 
     # start the main subscriber loop for each arm

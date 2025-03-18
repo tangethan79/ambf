@@ -11,6 +11,7 @@ import dvrk
 from trimesh import proximity
 
 # ros and ambf imports
+import rosbag
 import rospy
 import rospkg
 #import time
@@ -63,13 +64,33 @@ def convert_np_to_list(data):
 
 
 class rob_state_ndi:
-    def __init__(self, tree, psmnum = 2, cylinder_update = False, surface_sphere = False, force_vis = True, force_pub = False, bimanual = 0, sdf = False, launch = False):
+    def __init__(self, tree, psmnum = 2, cylinder_update = True, surface_sphere = True, force_pub = True, bimanual = 0, sdf = False, launch = False, record_result = False):
+        self.psmnum = psmnum
+        
         if launch == True:
             ndi_ecm_str = '/NDI_ECM'
             dvrk_ecm_str = '/DVRK_ECM'
         else:
             ndi_ecm_str = '/NDI/ECM/measured_cp'
             dvrk_ecm_str = '/ECM/measured_cp'
+
+        self.record_result = record_result
+        if self.record_result:
+            date_str = datetime.date.today().strftime('%y-%m-%d')
+            self.today_dir_str = os.path.join(logs_path, date_str)
+
+            if not os.path.exists(self.today_dir_str):
+                os.mkdir(self.today_dir_str)
+
+            time_str = datetime.datetime.now()
+            self.time_str = time_str.strftime("%H:%M:%S")
+
+            file_path = os.path.join(self.today_dir_str, self.time_str) + 'PSM' + str(self.psmnum)
+
+            self.json_file_path = file_path + '.json' # create new json file in today's log directory with timestamp as filename
+
+            self.bag = rosbag.Bag(file_path + '.bag', 'w')
+            self.roll_frame_bag = PoseStamped()
 
 
         self.cylinder_update = cylinder_update
@@ -154,7 +175,6 @@ class rob_state_ndi:
 
 
         # dist is a 3xn list of the distance, the tree index, and the timestep
-        self.roll_dist = np.empty([0,3])
         self.roll_points = None
 
         self.grip1_position = None
@@ -163,13 +183,13 @@ class rob_state_ndi:
         self.grip2_position = None
         self.grip2_dist = np.empty([0,3])
 
-        self.fmag_list = np.empty([0,2])
+        self.fmag_list = np.empty([0,3])
 
         # maximum distance until manipulator experiences force
-        self.dmax = 0.05
+        self.dmax = 0.2
         self.wall_thresh = 0.02
         # saturation cutoff for force generation
-        self.force_sat = 3.5
+        self.force_sat = 2.5
 
         # mesh indicator tracking closest point
         self.surface_sphere = surface_sphere
@@ -183,14 +203,8 @@ class rob_state_ndi:
         self.cylinder_pub = RigidBodyCmd()
         self.cylinder_pub.cartesian_cmd_type = 1
 
-        # flag for force visualization arrow
-        self.force_vis = force_vis
-
         # flag for force publishing
         self.force_pub = force_pub
-
-        self.plot_roll = False
-        self.plot_force_mag = True
 
         # time threshold for velocity calculations, messages are only processed if this amount of time has passed
         self.time_threshold = 0.05
@@ -238,7 +252,11 @@ class rob_state_ndi:
     def exp_force(self, dist):
         if dist < 0:
             dist = 0
-        f_scale = np.exp(-20*dist)*self.force_sat
+        steepness = 50
+        dist_inv = self.dmax-dist
+
+        f_scale = (self.force_sat/(np.exp(steepness*self.dmax)-1)) * (np.exp(steepness*dist_inv)-1)
+        #f_scale = np.exp(-20*dist)*self.force_sat
         return f_scale
 
 
@@ -276,8 +294,8 @@ class rob_state_ndi:
             if np.sqrt(self.PSM_F.x**2 + self.PSM_F.y**2 + self.PSM_F.z**2) > self.force_sat and dist < self.wall_thresh:
                 f_scale = self.force_sat
             else:
-                #f_scale = self.exp_force(dist)
-                f_scale = self.sqrt_force(dist)
+                f_scale = self.exp_force(dist)
+                #f_scale = self.sqrt_force(dist)
 
             # scale force according to velocity vector alignment with offset
             v_scale = (np.dot(self.roll_vel, f)*0.5)+1
@@ -375,7 +393,7 @@ class rob_state_ndi:
         end_point = bim_roll_position - bim_roll_y_axis* self.roll_end_dist
         # print(start_point,end_point,self.roll_position, self.roll_y_axis)
 
-        # generate list of query points and transpose to fit query requirementsdata.pose.orientation.xs in velocity
+        # generate list of query points and transpose to fit query requirements
 
         self.bim_q_points = np.linspace(start_point, end_point, num=20)
 
@@ -388,6 +406,9 @@ class rob_state_ndi:
         # ambf units are in decimetres so we multiply the metre value by 10
 
         # the extra fixed pose is the pose of the reference geometry in ambf, i.e. the cleft model
+
+        h = Header()
+        h.stamp = rospy.Time.now()
 
         PSM_p = np.array([data.pose.position.x*10,data.pose.position.y*10,data.pose.position.z*10]).reshape(3,1)
         PSM_R = R.from_quat([data.pose.orientation.x,data.pose.orientation.y,data.pose.orientation.z,data.pose.orientation.w])
@@ -479,8 +500,7 @@ class rob_state_ndi:
 
             # store closest points in appropriate array
             query_closest = np.argmin(q_distances[0])
-            closest = np.array([q_distances[0][query_closest], q_distances[1][query_closest], data.header.stamp.to_sec()])
-            self.roll_dist = np.vstack((self.roll_dist,closest))
+            dist = q_distances[0][query_closest]
         else:
             grad_vec, dist, closest = self.sdf.query_SDF_grad(q_points)
         # print(closest[0])
@@ -516,16 +536,18 @@ class rob_state_ndi:
 
         if self.force_pub == True:
             # add header to wrench for publishing protocol
-            h = Header()
-            h.stamp = rospy.Time.now()
             w_stamped = WrenchStamped()
             w_stamped.header = h
             w_stamped.wrench = wrench
             self.force_cmd.publish(w_stamped)
 
-        if self.force_vis == True:
+        if self.record_result == True:
             mag_stamp = np.array([mag, dist, data.header.stamp.to_sec()])
             self.fmag_list = np.vstack((self.fmag_list, mag_stamp))
+
+            self.roll_frame_bag.pose = self.roll_frame
+            self.roll_frame_bag.header = h
+            self.bag.write('/ambf/env/Cylinder' + str(self.psmnum) + '/Command', self.roll_frame_bag)
 
         # update surface sphere pos based on KD_tree query
         if self.surface_sphere == True:
@@ -544,36 +566,11 @@ class rob_state_ndi:
 
     def cleanup(self):
         # execute on finish
-
-        if self.plot_roll:
-            # shift distance values to zero seconds starting at program start
-            oldest_time = self.roll_dist[0][2]
-            self.roll_dist[:, -1] -= oldest_time
-
-
-            print('program finished')
-            print(self.roll_dist)
-
-            roll_timestamp = self.roll_dist[:, -1]
-            roll_d_list = self.roll_dist[:, 0]
-
-            # print(roll_timestamp)
-
-            fig, ax = plt.subplots()
-            plt.plot(roll_timestamp, roll_d_list, 'r')
-            plt.show()
-
-        elif self.plot_force_mag:
-            date_str = datetime.date.today().strftime('%y-%m-%d')
-            today_dir_str = os.path.join(logs_path, date_str)
-
-            if not os.path.exists(today_dir_str):
-                os.mkdir(today_dir_str)
-
-            time_str = datetime.now.strftime("%H:%M:%S")
+        self.bag.close()
+        if self.record_result:
 
             # shift distance values to zero seconds starting at program start
-            oldest_time = self.fmag_list[0][1]
+            oldest_time = self.fmag_list[0][-1]
             self.fmag_list[:, -1] -= oldest_time
 
 
@@ -583,12 +580,10 @@ class rob_state_ndi:
             f_timestamp = self.fmag_list[:, -1]
             mag_list = self.fmag_list[:, 0]
 
-            results_dict = {'timestamp':self.fmag_list[:,2],'forces':self.fmag_list[:,0],'distance':self.fmag_list[:,0]}
+            results_dict = {'timestamp':self.fmag_list[:,2],'forces':self.fmag_list[:,0],'distance':self.fmag_list[:,1]}
             results_dict = convert_np_to_list(results_dict) # convert results dictionary into list format for json writing
 
-
-            json_file_path = os.path.join(today_dir_str, time_str) + '.json' # create new json file in today's log directory with timestamp as filename
-            with open(json_file_path, "w") as json_file:
+            with open(self.json_file_path, "w") as json_file:
                 json.dump(results_dict, json_file, indent=4)
 
             fig, ax = plt.subplots()
