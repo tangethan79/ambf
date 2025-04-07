@@ -21,7 +21,8 @@ sys.path.append(scripts_path)
 from mesh import MeshObj
 from robot_ambf import rob_state
 from robot_ndi import rob_state_ndi
-
+from kf_force_feedback import rob_state_kf
+from ndi_kf import PSM_KF
 
 if __name__ == '__main__':
     parser = ArgumentParser()
@@ -36,6 +37,8 @@ if __name__ == '__main__':
     parser.set_defaults(haptic = False)
     parser.add_argument('--launch', action='store_true') # nodes started from launch file, use throttled topics for ecm
     parser.set_defaults(haptic = False)
+    parser.add_argument('--kf', action='store_true')
+    parser.set_defaults(kf = False)
     args, _ = parser.parse_known_args()
 
     if args.arm is None:
@@ -60,10 +63,14 @@ if __name__ == '__main__':
             psm_listener = rob_state(tree.tree, psmnum = args.arm, bimanual = args.bimanual, force_pub=args.haptic, sdf=False)
     else:
         sdf = MeshObj(adf_num = args.adf, sdf = True)
-        if args.ndi is True:
-            psm_listener = rob_state_ndi(sdf, psmnum = args.arm, bimanual = args.bimanual, sdf = True, force_pub=args.haptic, launch = args.launch)
+        if args.kf is True:
+            filter = PSM_KF(args.arm)
+            psm_listener = rob_state_kf(sdf,  filter = filter, psmnum = args.arm, sdf = True, force_pub=args.haptic)
         else:
-            psm_listener = rob_state(tree=sdf, psmnum = args.arm, bimanual = args.bimanual, sdf = True, force_pub=args.haptic)
+            if args.ndi is True:
+                psm_listener = rob_state_ndi(sdf, psmnum = args.arm, bimanual = args.bimanual, sdf = True, force_pub=args.haptic, launch = args.launch)
+            else:
+                psm_listener = rob_state(tree=sdf, psmnum = args.arm, bimanual = args.bimanual, sdf = True, force_pub=args.haptic)
             
 
 

@@ -9,12 +9,14 @@ import rospy
 import crtk, dvrk
 
 class PSM_KF:
-    def __init__(self, psmnum):
+    def __init__(self, psmnum, rcm_pub_flag = False):
+        self.rcm_pub_flag = rcm_pub_flag
         self.psmnum = psmnum
-        self.toolname = "PSM" + str(self.psmnum)
+        self.toolname = "PSM" + str(self.psmnum) + '_kf'
         self.ral = crtk.ral(self.toolname)
         self.arm = dvrk.arm(self.ral)
 
+        # note change of topic name to /NDI/PSM#_kf to support new calibration
         self.topic_dict = {'/NDI/' + self.toolname + '/measured_cp': {'data': None, 'type': PoseStamped, 'arm':'PSM'}}
 
         self.RCM_pose_posterior = None
@@ -55,6 +57,8 @@ class PSM_KF:
             [0, 0, 0, 0, 0, meas_ang_var]
             ])
         
+        
+        self.RCM_pub = rospy.Publisher(self.toolname+'_RCM_pose', Pose, queue_size=10)
 
     def DH_to_transform(self, DH_params):
         # program assumes DH format in this order
@@ -246,23 +250,28 @@ class PSM_KF:
         
         # calculate posterior state update and update homogenous posterior as well
         self.PSM_pose_state_posterior = PSM_pose_prior + np.matmul(K, (PSM_pose_state_measurement - PSM_pose_prior))
+        PSM_posterior_orientation = R.from_euler('zyz', self.PSM_pose_state_posterior[3:].reshape(1,3))
+        PSM_posterior_orientation = PSM_posterior_orientation.as_matrix()
+        self.PSM_pose_homogeneous_posterior = np.vstack((np.hstack((PSM_posterior_orientation, self.PSM_pose_state_posterior[0:3])), np.array([0,0,0,1])))
 
         # calculate posterior covariance P
         self.P_posterior = np.matmul((np.identity(3) - K), P_prior)
 
         # calculate new RCM pose and update posterior by computing kinematics backwards
         self.RCM_pose_posterior = self.calculate_RCM(joints_now)
-        # publish RCM pose
-        RCM_r = R.from_matrix(self.RCM_pose_posterior[0:3,0:3])
-        RCM_r = RCM_r.as_quat()
-        self.RCM_pose_state.position.x = self.RCM_pose_posterior[0,3]
-        self.RCM_pose_state.position.y = self.RCM_pose_posterior[1,3]
-        self.RCM_pose_state.position.z = self.RCM_pose_posterior[2,3]
-        self.RCM_pose_state.orientation.x = RCM_r[0]
-        self.RCM_pose_state.orientation.y = RCM_r[1]
-        self.RCM_pose_state.orientation.z = RCM_r[2]
-        self.RCM_pose_state.orientation.w = RCM_r[3]
-        self.RCM_pub.publish(self.RCM_pose_state)
+
+        if self.rcm_pub_flag is True:
+            # publish RCM pose
+            RCM_r = R.from_matrix(self.RCM_pose_posterior[0:3,0:3])
+            RCM_r = RCM_r.as_quat()
+            self.RCM_pose_state.position.x = self.RCM_pose_posterior[0,3]
+            self.RCM_pose_state.position.y = self.RCM_pose_posterior[1,3]
+            self.RCM_pose_state.position.z = self.RCM_pose_posterior[2,3]
+            self.RCM_pose_state.orientation.x = RCM_r[0]
+            self.RCM_pose_state.orientation.y = RCM_r[1]
+            self.RCM_pose_state.orientation.z = RCM_r[2]
+            self.RCM_pose_state.orientation.w = RCM_r[3]
+            self.RCM_pub.publish(self.RCM_pose_state)
 
 
         # update timestamp, velocity, and joints for next iteration
@@ -280,8 +289,6 @@ class PSM_KF:
         for key in self.topic_dict:
             if self.topic_dict[key]["arm"] == "PSM":
                 rospy.Subscriber(name = key, data_class=self.topic_dict[key]["type"], callback=self.kf_update, callback_args=key)
-        
-        self.RCM_pub = rospy.Publisher(self.toolname+'_RCM_pose', Pose, queue_size=10)
         
         # VF logic, only do this at 5 Hz to not slow down sim
         rate = rospy.Rate(5)
